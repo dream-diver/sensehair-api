@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Auth Routes
-Route::post('login', [App\Http\Controllers\Api\Auth\LoginController::class, 'login']);
+Route::post('login', [App\Http\Controllers\Api\Auth\AuthController::class, 'login']);
 // Route::middleware('guest')->group(function(){
 // });
 
@@ -30,5 +30,5 @@ Route::middleware('auth:sanctum')->group(function () {
             'users' => App\Http\Controllers\Api\UsersController::class,
         ]);
     // });
-    Route::post('logout', [App\Http\Controllers\Api\Auth\LoginController::class, 'logout']);
+    Route::post('logout', [App\Http\Controllers\Api\Auth\AuthController::class, 'logout']);
 });
