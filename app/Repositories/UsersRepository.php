@@ -44,8 +44,8 @@ class UsersRepository extends BaseRepository
         $user->fill($attributes);
         $user->save();
 
-        if ($request->role == 'customer') {
-            $user->assignRole('customer');
+        if ($request->role == 'stylist') {
+            $user->assignRole('stylist');
         } else {
             $user->assignRole('customer');
         }
