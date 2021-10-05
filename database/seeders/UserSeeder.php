@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
 		$user = User::first();
 		$user->assignRole('admin');
         if(App::environment('local')){
-            $users = User::factory()->count(125)->create();
+            $users = User::factory()->count(1)->create();
             $users->each(function($user){
                 $user->assignRole('customer');
             });

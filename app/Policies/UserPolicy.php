@@ -40,7 +40,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('users.create');
+        return $user->hasPermissionTo('users.create');
     }
 
     /**
@@ -52,7 +52,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->hasRole('users.update');
+        return $user->hasPermissionTo('users.update');
     }
 
     /**
