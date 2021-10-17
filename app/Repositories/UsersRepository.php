@@ -27,7 +27,9 @@ class UsersRepository extends BaseRepository
             $model = $model->role($request->role);
         }
 
-        return $model->paginate($request->input('limit', 10));
+        return $model
+            ->orderBy($request->input('orderBy', 'created_at'), $request->input('sort', 'desc'))
+            ->paginate($request->input('limit', 10));
     }
 
     /**

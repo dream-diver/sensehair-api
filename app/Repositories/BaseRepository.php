@@ -37,7 +37,9 @@ class BaseRepository
      */
     public function paginate(Request $request)
     {
-        return $this->model->paginate($request->input('limit', 10));
+        return $this->model
+                    ->orderBy($request->input('orderBy', 'created_at'), $request->input('sort', 'desc'))
+                    ->paginate($request->input('limit', 10));
     }
 
     /**
