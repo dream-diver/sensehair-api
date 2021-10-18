@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
                 $user->assignRole('customer');
             });
 
-            User::factory()->count(5)->create()->each(function($user){
+            User::factory()->count(10)->create()->each(function($user){
                 $user->assignRole('stylist');
             });
         }

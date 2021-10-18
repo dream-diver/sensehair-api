@@ -26,9 +26,10 @@ Route::post('login', [App\Http\Controllers\Api\Auth\AuthController::class, 'logi
 
 Route::middleware('auth:sanctum')->group(function () {
     // Route::group(['middleware' => ['role:admin']], function () {
-        Route::apiResources([
-            'users' => App\Http\Controllers\Api\UsersController::class,
-        ]);
     // });
+
+    Route::apiResources([ 'users' => App\Http\Controllers\Api\UsersController::class, ]);
+    Route::apiResources([ 'services' => App\Http\Controllers\Api\ServicesController::class, ]);
+
     Route::post('logout', [App\Http\Controllers\Api\Auth\AuthController::class, 'logout']);
 });

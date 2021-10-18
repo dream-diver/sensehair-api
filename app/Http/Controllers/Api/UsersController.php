@@ -95,10 +95,12 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
+        $this->authorize('delete', $user);
+
         try {
-            $this->repository->delete($id);
+            $this->repository->delete($user);
             return $this->respondNoContent();
         } catch (Exception $e) {
             return $this->respondServerError(['message' => $e->getMessage()]);

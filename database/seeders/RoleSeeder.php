@@ -20,6 +20,8 @@ class RoleSeeder extends Seeder
         $customerRole = Role::create(['name' => 'customer']);
         $guestRole = Role::create(['name' => 'guest']);
 
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // User model permissions
         // create user permission
         $permission = Permission::create(['name' => 'users.create']);
         $adminRole->givePermissionTo($permission);
@@ -39,6 +41,29 @@ class RoleSeeder extends Seeder
         // delete user permission
         $permission = Permission::create(['name' => 'users.delete']);
         $adminRole->givePermissionTo($permission);
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // create service permission
+        $permission = Permission::create(['name' => 'services.create']);
+        $adminRole->givePermissionTo($permission);
+
+        // index service permission
+        $permission = Permission::create(['name' => 'services.index']);
+        $adminRole->givePermissionTo($permission);
+
+        // show service permission
+        $permission = Permission::create(['name' => 'services.show']);
+        $adminRole->givePermissionTo($permission);
+
+        // update service permission
+        $permission = Permission::create(['name' => 'services.update']);
+        $adminRole->givePermissionTo($permission);
+
+        // delete service permission
+        $permission = Permission::create(['name' => 'services.delete']);
+        $adminRole->givePermissionTo($permission);
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // create a booking permission
         $permission = Permission::create(['name' => 'bookings.create']);

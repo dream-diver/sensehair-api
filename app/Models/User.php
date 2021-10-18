@@ -15,7 +15,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are not mass assignable.
      *
      * @var string[]
      */
@@ -53,5 +53,15 @@ class User extends Authenticatable
     public function path()
     {
         return '/api/users/' . $this->id;
+    }
+
+    /**
+     * The services that belong to the user.
+     */
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'service_user', 'user_id', 'service_id')
+                    ->withPivot('stylist_charge')
+                    ->withTimestamps();
     }
 }

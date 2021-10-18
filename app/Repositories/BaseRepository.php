@@ -90,9 +90,9 @@ class BaseRepository
      * @param  Integer $id integer of primary key id.
      * @return boolean
      */
-    public function delete($id)
+    public function delete(Model $item)
     {
-        return $this->model->destroy($id);
+        return $this->model->destroy($item->id);
     }
 
     /**
