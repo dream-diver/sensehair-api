@@ -33,7 +33,11 @@ class UsersController extends Controller
     {
         $this->authorize('viewAny', App\Models\User::class);
 
-        $users = $this->repository->paginate($request);
+        if($request->limit == 'all') {
+            $users = $this->repository->get($request);
+        } else {
+            $users = $this->repository->paginate($request);
+        }
 
         return UserResource::collection($users);
     }

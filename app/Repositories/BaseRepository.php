@@ -25,9 +25,11 @@ class BaseRepository
      *
      * @return Collection of items.
      */
-    public function get()
+    public function get(Request $request)
     {
-        return $this->model->get();
+        return $this->model
+                    ->orderBy($request->input('orderBy', 'created_at'), $request->input('sort', 'desc'))
+                    ->get();
     }
 
     /**

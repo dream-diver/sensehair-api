@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ServiceStoreRequest;
 use App\Http\Resources\ServiceResource;
 use App\Models\Service;
 use App\Repositories\ServicesRepository;
 use App\Util\HandleResponse;
 use Illuminate\Http\Request;
+use League\Flysystem\Exception;
 
 class ServicesController extends Controller
 {
@@ -40,9 +42,16 @@ class ServicesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ServiceStoreRequest $request)
     {
-        //
+        $this->authorize('create', App\Models\Service::class);
+
+        try {
+            $service = $this->repository->store($request);
+            return $this->respondCreated(['service' => new ServiceResource($service)]);
+        } catch (Exception $e) {
+            return $this->respondServerError(['message' => $e->getMessage()]);
+        }
     }
 
     /**

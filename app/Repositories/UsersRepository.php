@@ -15,6 +15,24 @@ class UsersRepository extends BaseRepository
     }
 
     /**
+     * get all the items collection from database table using model.
+     *
+     * @return Collection of items.
+     */
+    public function get(Request $request)
+    {
+        $model = $this->model;
+
+        if($request->has('role')){
+            $model = $model->role($request->role);
+        }
+
+        return $model
+            ->orderBy($request->input('orderBy', 'created_at'), $request->input('sort', 'desc'))
+            ->get();
+    }
+
+    /**
      * get collection of users in paginate format.
      *
      * @return Collection of users

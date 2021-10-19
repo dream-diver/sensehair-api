@@ -13,4 +13,29 @@ class ServicesRepository extends BaseRepository
     {
         $this->model = $model;
     }
+
+    /**
+     * create new Service in database.
+     *
+     * @param Request $request Illuminate\Http\Request
+     * @return saved Service object with data.
+     */
+    public function store(Request $request)
+    {
+        $data = $this->setDataPayload($request);
+
+        $service = $this->model;
+        $service->fill([
+            'name' => $request->name,
+            'price' => $request->price,
+            'duration' => $request->duration,
+        ]);
+        $service->save();
+
+        foreach($request->stylists as $stylist) {
+            $service->users()->attach($stylist['id'], ['stylist_charge' => $stylist['stylist_charge']]);
+        }
+
+        return $service;
+    }
 }

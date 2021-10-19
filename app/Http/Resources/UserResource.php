@@ -21,6 +21,7 @@ class UserResource extends JsonResource
                 'email' => $this->email,
                 'phone' => $this->phone,
                 'role' => $this->roles()->first()->name,
+                'pivot' => $this->pivot,
 
 				'updated_at' => $this->updated_at->format('d/m/Y h:ia'),
 				'created_at' => $this->created_at->format('d/m/Y h:ia'),
