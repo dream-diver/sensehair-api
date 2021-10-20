@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class ServiceStoreRequest extends FormRequest
+class ServiceUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,7 @@ class ServiceStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->hasPermissionTo('services.create');
+        return Auth::user()->hasPermissionTo('services.update');
     }
 
     /**

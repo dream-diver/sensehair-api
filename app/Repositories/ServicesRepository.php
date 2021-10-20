@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Models\Service;
 use App\Repositories\BaseRepository;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class ServicesRepository extends BaseRepository
@@ -37,5 +38,25 @@ class ServicesRepository extends BaseRepository
         }
 
         return $service;
+    }
+
+    public function update(Model $item, Request $request)
+    {
+        $data = $this->setDataPayload($request);
+
+        $item->fill([
+            'name' => $request->name,
+            'price' => $request->price,
+            'duration' => $request->duration,
+        ]);
+        $item->save();
+
+        $stylistArray = [];
+        foreach($request->stylists as $stylist) {
+            $stylistArray[$stylist['id']] = ['stylist_charge' => $stylist['stylist_charge']];
+        }
+        $item->users()->sync($stylistArray);
+
+        return $item;
     }
 }

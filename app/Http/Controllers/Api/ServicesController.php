@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ServiceStoreRequest;
+use App\Http\Requests\ServiceUpdateRequest;
 use App\Http\Resources\ServiceResource;
 use App\Models\Service;
 use App\Repositories\ServicesRepository;
@@ -62,7 +63,9 @@ class ServicesController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        $this->authorize('view', $service);
+
+        return $this->respondOk(['service' => new ServiceResource($service)]);
     }
 
     /**
@@ -72,9 +75,16 @@ class ServicesController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(ServiceUpdateRequest $request, Service $service)
     {
-        //
+        $this->authorize('update', $service);
+
+        try {
+            $service = $this->repository->update($service, $request);
+            return $this->respondOk(['service' => new ServiceResource($service)]);
+        } catch (Exception $e) {
+            return $this->respondServerError(['message' => $e->getMessage()]);
+        }
     }
 
     /**
