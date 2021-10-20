@@ -95,6 +95,13 @@ class ServicesController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $this->authorize('delete', $service);
+
+        try {
+            $this->repository->delete($service);
+            return $this->respondNoContent();
+        } catch (Exception $e) {
+            return $this->respondServerError(['message' => $e->getMessage()]);
+        }
     }
 }

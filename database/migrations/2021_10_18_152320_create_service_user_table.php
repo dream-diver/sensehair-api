@@ -22,7 +22,6 @@ class CreateServiceUserTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-
             $table->foreign('service_id')->references('id')->on('services');
             $table->foreign('user_id')->references('id')->on('users');
         });
