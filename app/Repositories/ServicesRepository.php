@@ -27,9 +27,9 @@ class ServicesRepository extends BaseRepository
 
         $service = $this->model;
         $service->fill([
-            'name' => $request->name,
-            'price' => $request->price,
-            'duration' => $request->duration,
+            'name' => $data['name'],
+            'price' => $data['price'],
+            'duration' => $data['duration'],
         ]);
         $service->save();
 
@@ -45,9 +45,9 @@ class ServicesRepository extends BaseRepository
         $data = $this->setDataPayload($request);
 
         $item->fill([
-            'name' => $request->name,
-            'price' => $request->price,
-            'duration' => $request->duration,
+            'name' => $data['name'],
+            'price' => $data['price'],
+            'duration' => $data['duration'],
         ]);
         $item->save();
 

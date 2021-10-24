@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Booking;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -63,5 +64,17 @@ class User extends Authenticatable
         return $this->belongsToMany(Service::class, 'service_user', 'user_id', 'service_id')
                     ->withPivot('stylist_charge')
                     ->withTimestamps();
+    }
+
+    /**
+     * The bookings that belong to the user.
+     */
+    public function bookings()
+    {
+        if ($this->hasRole('stylist')) {
+            return $this->hasMany(Booking::class, 'stylist_id');
+        } else if ($this->hasRole('customer')) {
+            return $this->hasMany(Booking::class, 'customer_id');
+        }
     }
 }
