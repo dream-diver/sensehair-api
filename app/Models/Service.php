@@ -26,14 +26,4 @@ class Service extends Model
     {
         return '/api/services/' . $this->id;
     }
-
-    /**
-     * The users that belong to the service.
-     */
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'service_user', 'service_id', 'user_id')
-                    ->withPivot('stylist_charge')
-                    ->withTimestamps();
-    }
 }

@@ -21,10 +21,20 @@ class ServiceFactory extends Factory
      */
     public function definition()
     {
+        $hairSizes = ['Men', 'Women Short Hair', 'Women Medium Hair', 'Women Long Hair'];
+        $hairTypes = ['Straight', 'Wavy', 'Curly', 'Coily'];
+
+        $hairSizeIndex = rand(0, 3);
+
         return [
             'name' => $this->faker->word(),
             'duration' => rand(20, 60),
-            'price' => $this->faker->randomFloat(null, 10, 100),
+
+            'stylist_price' => $this->faker->randomFloat(null, 10, 100),
+            'art_director_price' => $this->faker->randomFloat(null, 10, 100),
+
+            'hair_size' => $hairSizes[$hairSizeIndex],
+            'hair_type' => ($hairSizeIndex !== 0) ? $hairTypes[rand(0, 3)] : NULL,
         ];
     }
 }

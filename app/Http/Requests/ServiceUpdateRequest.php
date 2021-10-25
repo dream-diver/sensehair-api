@@ -27,8 +27,12 @@ class ServiceUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'duration' => ['required', 'string'],
-            'price' => ['required', 'string'],
-            'stylists' => ['array', 'nullable'],
+
+            'stylist_price' => ['required', 'string'],
+            'art_director_price' => ['required', 'string'],
+
+            'hair_size' => ['required', 'string'],
+            'hair_type' => ['string', 'nullable'],
         ];
     }
 }

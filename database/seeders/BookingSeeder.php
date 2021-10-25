@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 
 class BookingSeeder extends Seeder
 {
@@ -13,6 +14,7 @@ class BookingSeeder extends Seeder
      */
     public function run()
     {
-        //
+        if(App::environment('local')){
+        }
     }
 }

@@ -17,7 +17,12 @@ class CreateServicesTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('duration'); // in minutes
-            $table->float('price');
+
+            $table->float('stylist_price');
+            $table->float('art_director_price');
+
+            $table->string('hair_size');
+            $table->string('hair_type')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

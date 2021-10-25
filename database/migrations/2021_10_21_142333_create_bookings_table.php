@@ -17,9 +17,6 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
 
-            $table->string('hair_size');
-            $table->string('hair_type');
-
             $table->datetime('booking_time');
 
             $table->unsignedBigInteger('customer_id');

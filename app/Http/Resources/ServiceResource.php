@@ -19,8 +19,12 @@ class ServiceResource extends JsonResource
                 'id' => $this->id,
                 'name' => $this->name,
                 'duration' => $this->duration,
-                'price' => $this->price,
-                'stylists' => UserResource::collection($this->users),
+
+                'stylist_price' => $this->stylist_price,
+                'art_director_price' => $this->art_director_price,
+
+                'hair_size' => $this->hair_size,
+                'hair_type' => $this->hair_type,
 
 				'updated_at' => $this->updated_at->format('d/m/Y h:ia'),
 				'created_at' => $this->created_at->format('d/m/Y h:ia'),
