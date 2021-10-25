@@ -32,7 +32,11 @@ class ServicesController extends Controller
     {
         $this->authorize('viewAny', App\Models\Service::class);
 
-        $services = $this->repository->paginate($request);
+        if($request->limit == 'all') {
+            $services = $this->repository->get($request);
+        } else {
+            $services = $this->repository->paginate($request);
+        }
 
         return ServiceResource::collection($services);
     }
