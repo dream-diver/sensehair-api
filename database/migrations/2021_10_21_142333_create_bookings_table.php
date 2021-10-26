@@ -19,6 +19,7 @@ class CreateBookingsTable extends Migration
 
             $table->datetime('booking_time');
             $table->float('charge');
+            $table->float('duration')->default(0);
 
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('server_id');

@@ -19,7 +19,14 @@ class BookingSeeder extends Seeder
         if(App::environment('local')){
             $services = Service::all();
             Booking::factory()->count(25)->create()->each(function ($booking) use ($services) {
-                $booking->services()->sync($services->random(5)->pluck('id'));
+                $randomServices = $services->random(5);
+                $booking->services()->sync($randomServices->pluck('id'));
+
+                // setting booking duration
+                $sum = $randomServices->reduce(function ($sum, $service) {
+                    return $sum + $service->duration;
+                });
+                $booking->update(['duration' => $sum]);
             });
         }
     }
