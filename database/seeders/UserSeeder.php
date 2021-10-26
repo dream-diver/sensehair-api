@@ -35,6 +35,10 @@ class UserSeeder extends Seeder
             User::factory()->count(10)->create()->each(function($user){
                 $user->assignRole('stylist');
             });
+
+            User::factory()->count(10)->create()->each(function($user){
+                $user->assignRole('art_director');
+            });
         }
     }
 }

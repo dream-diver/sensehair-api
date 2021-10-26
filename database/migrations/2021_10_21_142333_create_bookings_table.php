@@ -18,10 +18,15 @@ class CreateBookingsTable extends Migration
             $table->id();
 
             $table->datetime('booking_time');
+            $table->float('charge');
 
             $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('stylist_id');
+            $table->unsignedBigInteger('server_id');
 
+            $table->foreign('customer_id')->references('id')->on('users');
+            $table->foreign('server_id')->references('id')->on('users');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

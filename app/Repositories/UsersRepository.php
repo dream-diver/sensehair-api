@@ -66,6 +66,8 @@ class UsersRepository extends BaseRepository
 
         if ($request->role == 'stylist') {
             $user->assignRole('stylist');
+        } else if ($request->role == 'art_director') {
+            $user->assignRole('art_director');
         } else {
             $user->assignRole('customer');
         }

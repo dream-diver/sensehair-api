@@ -31,9 +31,9 @@ class Booking extends Model
     /**
      * The stylist that this booking belongs to
      */
-    public function stylist()
+    public function server()
     {
-        return $this->belongsTo(User::class, 'stylist_id');
+        return $this->belongsTo(User::class, 'server_id');
     }
 
     /**
@@ -42,5 +42,13 @@ class Booking extends Model
     public function customer()
     {
         return $this->belongsTo(User::class, 'customer_id');
+    }
+
+    /**
+     * All the Services that this booking has
+     */
+    public function services ()
+    {
+        return $this->belongsToMany(Service::class);
     }
 }
