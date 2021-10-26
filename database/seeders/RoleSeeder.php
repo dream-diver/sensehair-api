@@ -71,5 +71,21 @@ class RoleSeeder extends Seeder
         $adminRole->givePermissionTo($permission);
         $customerRole->givePermissionTo($permission);
         $guestRole->givePermissionTo($permission);
+
+        // index booking permission
+        $permission = Permission::create(['name' => 'bookings.index']);
+        $adminRole->givePermissionTo($permission);
+
+        // show booking permission
+        $permission = Permission::create(['name' => 'bookings.show']);
+        $adminRole->givePermissionTo($permission);
+
+        // update booking permission
+        $permission = Permission::create(['name' => 'bookings.update']);
+        $adminRole->givePermissionTo($permission);
+
+        // delete booking permission
+        $permission = Permission::create(['name' => 'bookings.delete']);
+        $adminRole->givePermissionTo($permission);
     }
 }

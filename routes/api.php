@@ -28,9 +28,11 @@ Route::middleware('auth:sanctum')->group(function () {
     // Route::group(['middleware' => ['role:admin']], function () {
     // });
 
-    Route::apiResources([ 'users' => App\Http\Controllers\Api\UsersController::class, ]);
-    Route::apiResources([ 'services' => App\Http\Controllers\Api\ServicesController::class, ]);
-    Route::apiResources([ 'bookings' => App\Http\Controllers\Api\BookingsController::class, ]);
+    Route::apiResource('users', App\Http\Controllers\Api\UsersController::class);
+    Route::apiResource('services', App\Http\Controllers\Api\ServicesController::class);
+    Route::apiResource('bookings', App\Http\Controllers\Api\BookingsController::class);
 
     Route::post('logout', [App\Http\Controllers\Api\Auth\AuthController::class, 'logout']);
 });
+
+Route::get('servers/{user}/availableTimes', App\Http\Controllers\Api\GetAvailableTimesController::class);

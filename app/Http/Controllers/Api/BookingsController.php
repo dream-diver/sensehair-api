@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Http\Resources\BookingResource;
 use App\Models\Booking;
 use App\Repositories\BookingsRepository;
 use App\Util\HandleResponse;
 use Illuminate\Http\Request;
 
-class BookingController extends Controller
+class BookingsController extends Controller
 {
     use HandleResponse;
 
@@ -25,11 +27,11 @@ class BookingController extends Controller
      */
     public function index(Request $request)
     {
-        // $this->authorize('viewAny', App\Models\Booking::class);
-        //
-        // $bookings = $this->repository->paginate($request);
-        //
-        // return BookingResource::collection($bookings);
+        $this->authorize('viewAny', App\Models\Booking::class);
+
+        $bookings = $this->repository->paginate($request);
+
+        return BookingResource::collection($bookings);
     }
 
     /**
