@@ -25,11 +25,11 @@ class ServicesRepository extends BaseRepository
         $model = $this->model;
 
         if($request->has('hair_size')) {
-            $model->where('hair_size', $request->hair_size);
+            $model = $model->where('hair_size', '=', $request->hair_size);
         }
 
         if($request->has('hair_type')) {
-            $model->where('hair_type', $request->hair_type);
+            $model = $model->where('hair_type', '=', $request->hair_type);
         }
 
         return $model

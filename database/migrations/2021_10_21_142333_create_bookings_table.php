@@ -24,6 +24,9 @@ class CreateBookingsTable extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('server_id');
 
+            $table->string("stripe_client_secret")->nullable();
+            $table->string("stripe_id")->nullable();
+
             $table->foreign('customer_id')->references('id')->on('users');
             $table->foreign('server_id')->references('id')->on('users');
 
