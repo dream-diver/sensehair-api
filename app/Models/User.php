@@ -71,7 +71,7 @@ class User extends Authenticatable
      */
     public function bookings()
     {
-        if ($this->hasRole('stylist')) {
+        if ($this->hasRole(['stylist', 'art_director'])) {
             return $this->hasMany(Booking::class, 'server_id');
         } else if ($this->hasRole('customer')) {
             return $this->hasMany(Booking::class, 'customer_id');
