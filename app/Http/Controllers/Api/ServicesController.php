@@ -10,7 +10,6 @@ use App\Models\Service;
 use App\Repositories\ServicesRepository;
 use App\Util\HandleResponse;
 use Illuminate\Http\Request;
-use League\Flysystem\Exception;
 
 class ServicesController extends Controller
 {
@@ -54,7 +53,7 @@ class ServicesController extends Controller
         try {
             $service = $this->repository->store($request);
             return $this->respondCreated(['service' => new ServiceResource($service)]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->respondServerError(['message' => $e->getMessage()]);
         }
     }
@@ -86,7 +85,7 @@ class ServicesController extends Controller
         try {
             $service = $this->repository->update($service, $request);
             return $this->respondOk(['service' => new ServiceResource($service)]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->respondServerError(['message' => $e->getMessage()]);
         }
     }
@@ -104,7 +103,7 @@ class ServicesController extends Controller
         try {
             $this->repository->delete($service);
             return $this->respondNoContent();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->respondServerError(['message' => $e->getMessage()]);
         }
     }
