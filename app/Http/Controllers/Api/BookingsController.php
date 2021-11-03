@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BookingStoreRequest;
+use App\Http\Requests\BookingUpdateRequest;
 use App\Http\Resources\BookingResource;
 use App\Models\Booking;
 use App\Repositories\BookingsRepository;
@@ -40,10 +42,9 @@ class BookingsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookingStoreRequest $request)
     {
         $this->authorize('create', App\Models\Booking::class);
-        // return \Illuminate\Support\Carbon::parse($request->booking_time);
 
         try {
             $booking = $this->repository->store($request);
@@ -74,7 +75,7 @@ class BookingsController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Booking $booking)
+    public function update(BookingUpdateRequest $request, Booking $booking)
     {
         $this->authorize('update', $booking);
 
