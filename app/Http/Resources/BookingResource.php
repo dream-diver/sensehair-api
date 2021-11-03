@@ -15,11 +15,12 @@ class BookingResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $bookingResource = [
             'data' => [
                 'id' => $this->id,
-                'booking_time' => $this->updated_at->format('d/m/Y h:ia'),
+                'booking_time' => $this->booking_time->format('Y-m-d H:i'),
                 'charge' => $this->charge,
+                'duration' => $this->duration,
 
                 'customer_id' => $this->customer_id,
                 'server_id' => $this->server_id,
@@ -34,5 +35,10 @@ class BookingResource extends JsonResource
 				'self' => url($this->path())
 			]
         ];
+        if ($this->relationLoaded('services')) {
+            $bookingResource['data'] = array_merge($bookingResource['data'], ['services' => ServiceResource::collection($this->services)]);
+        }
+
+        return $bookingResource;
     }
 }

@@ -35,16 +35,6 @@ class BookingsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -52,7 +42,15 @@ class BookingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create', App\Models\Booking::class);
+        // return \Illuminate\Support\Carbon::parse($request->booking_time);
+
+        try {
+            $booking = $this->repository->store($request);
+            return $this->respondCreated(['booking' => new BookingResource($booking)]);
+        } catch (\Exception $e) {
+            return $this->respondServerError(['message' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -63,18 +61,10 @@ class BookingsController extends Controller
      */
     public function show(Booking $booking)
     {
-        //
-    }
+        $this->authorize('view', $booking);
+        $booking->services;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Booking $booking)
-    {
-        //
+        return $this->respondOk(['booking' => new BookingResource($booking)]);
     }
 
     /**
@@ -86,7 +76,14 @@ class BookingsController extends Controller
      */
     public function update(Request $request, Booking $booking)
     {
-        //
+        $this->authorize('update', $booking);
+
+        try {
+            $booking = $this->repository->update($booking, $request);
+            return $this->respondOk(['booking' => new BookingResource($booking)]);
+        } catch (\Exception $e) {
+            return $this->respondServerError(['message' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -97,6 +94,13 @@ class BookingsController extends Controller
      */
     public function destroy(Booking $booking)
     {
-        //
+        $this->authorize('delete', $booking);
+
+        try {
+            $this->repository->delete($booking);
+            return $this->respondNoContent();
+        } catch (\Exception $e) {
+            return $this->respondServerError(['message' => $e->getMessage()]);
+        }
     }
 }

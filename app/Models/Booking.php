@@ -17,6 +17,14 @@ class Booking extends Model
 
     use HasFactory;
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'booking_time' => 'datetime',
+    ];
 
     /**
      * Returns Bookings's path
