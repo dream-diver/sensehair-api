@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\PromocodeResource;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -25,9 +26,11 @@ class BookingResource extends JsonResource
 
                 'customer_id' => $this->customer_id,
                 'server_id' => $this->server_id,
+                'promocode_id' => $this->promocode_id,
 
                 'customer' => new UserResource($this->customer),
                 'server' => new UserResource($this->server),
+                'promocode' => new PromocodeResource($this->promocode),
 
 				'updated_at' => $this->updated_at->format('d/m/Y h:ia'),
 				'created_at' => $this->created_at->format('d/m/Y h:ia'),

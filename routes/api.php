@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Auth Routes
 Route::post('login', [App\Http\Controllers\Api\Auth\AuthController::class, 'login']);
+Route::post('register', [App\Http\Controllers\Api\Auth\AuthController::class, 'register']);
 // Route::middleware('guest')->group(function(){
 // });
 Route::get('bookings/{booking}/getPaymentIntent', [App\Http\Controllers\Api\BookingPaymentController::class, 'getPaymentIntent']);

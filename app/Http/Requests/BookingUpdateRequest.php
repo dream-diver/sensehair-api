@@ -33,6 +33,7 @@ class BookingUpdateRequest extends FormRequest
             'stripe_client_secret' => ['string', 'nullable'],
             'stripe_id' => ['string', 'nullable'],
             'payment_status' => ['string', 'nullable'],
+            'promocode' => ['string', 'nullable'],
             'services' => ['array', 'nullable'],
         ];
     }

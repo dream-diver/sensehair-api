@@ -66,6 +66,6 @@ class Booking extends Model
      */
     public function promocode()
     {
-        return $this->belongsTo(PromotionCode::class, 'promocode_id');
+        return $this->belongsTo(Promocode::class, 'promocode_id');
     }
 }

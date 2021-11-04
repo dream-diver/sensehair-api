@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserLoginRequest;
+use App\Http\Requests\UserRegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Util\HandleResponse;
@@ -24,6 +25,31 @@ class AuthController extends Controller
                 'data' => [],
                 'message' => 'The given data was invalid',
             ]);
+        }
+
+        return $this->respondOk([
+            'token' => $user->createToken(time())->plainTextToken,
+            'user' => UserResource::make($user),
+            'message' => 'Success',
+        ]);
+    }
+
+    public function register(UserRegisterRequest $request){
+        $user = User::where('email', $request->email)
+            ->first();
+
+        if ($user) {
+            return $this->respondBad([
+                'message' => 'Email already taken',
+            ]);
+        } else {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'password' => bcrypt($request->password),
+            ]);
+            $user->assignRole('customer');
         }
 
         return $this->respondOk([

@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Booking;
+use App\Models\Promocode;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -27,12 +28,15 @@ class BookingsRepository extends BaseRepository
         $data = $this->setDataPayload($request);
 
         $booking = $this->model;
+
+
         $booking->fill([
             'booking_time' => $data['booking_time'],
             'charge' => $data['charge'],
             'duration' => $data['duration'],
             'customer_id' => $data['customer_id'],
             'server_id' => $data['server_id'],
+            'promocode_id' => isset($data['promocode_id']) ? $data['promocode_id'] : null,
             'stripe_client_secret' => isset($data['stripe_client_secret']) ? $data['stripe_client_secret'] : null,
             'stripe_id' => isset($data['stripe_id']) ? $data['stripe_id'] : null,
         ]);
@@ -68,6 +72,14 @@ class BookingsRepository extends BaseRepository
             $attributes = $request->all();
         } else {
             $attributes = $request->validated();
+        }
+
+        if (isset($attributes['promocode'])) {
+            $promocode = Promocode::where('code', $attributes['promocode'])->first();
+            if($promocode) {
+                $attributes['charge'] = $attributes['charge'] * ((100-$promocode->discount) / 100);
+                $attributes['promocode_id'] = $promocode->id;
+            }
         }
         return $attributes;
     }
