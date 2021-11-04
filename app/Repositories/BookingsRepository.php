@@ -80,6 +80,7 @@ class BookingsRepository extends BaseRepository
                 $attributes['charge'] = $attributes['charge'] * ((100-$promocode->discount) / 100);
                 $attributes['promocode_id'] = $promocode->id;
             }
+            unset($attributes['promocode']);
         }
         return $attributes;
     }

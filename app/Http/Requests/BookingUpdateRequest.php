@@ -28,6 +28,10 @@ class BookingUpdateRequest extends FormRequest
             'booking_time' => ['string', 'nullable'],
             'charge' => ['numeric', 'nullable'],
             'duration' => ['integer', 'nullable'],
+            'name' => ['string', 'nullable'],
+            'email' => ['string', 'nullable'],
+            'phone' => ['string', 'nullable'],
+
             'customer_id' => ['integer', 'nullable'],
             'server_id' => ['integer', 'nullable'],
             'stripe_client_secret' => ['string', 'nullable'],

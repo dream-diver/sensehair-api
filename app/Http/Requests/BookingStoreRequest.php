@@ -27,7 +27,11 @@ class BookingStoreRequest extends FormRequest
             'booking_time' => ['required', 'string'],
             'charge' => ['required', 'numeric'],
             'duration' => ['required', 'integer'],
-            'customer_id' => ['required', 'integer'],
+            'name' => ['string', 'nullable'],
+            'email' => ['string', 'nullable'],
+            'phone' => ['string', 'nullable'],
+
+            'customer_id' => ['integer', 'nullable'],
             'server_id' => ['required', 'integer'],
             'stripe_client_secret' => ['string', 'nullable'],
             'stripe_id' => ['string', 'nullable'],

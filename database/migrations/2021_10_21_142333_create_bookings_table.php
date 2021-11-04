@@ -21,9 +21,13 @@ class CreateBookingsTable extends Migration
             $table->float('charge');
             $table->float('duration')->default(0);
 
-            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('customer_id')->nullable();
             $table->unsignedBigInteger('server_id');
             $table->unsignedBigInteger('promocode_id')->nullable();
+
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
 
             $table->string("stripe_client_secret")->nullable();
             $table->string("stripe_id")->nullable();
