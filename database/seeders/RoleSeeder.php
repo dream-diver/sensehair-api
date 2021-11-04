@@ -87,5 +87,27 @@ class RoleSeeder extends Seeder
         // delete booking permission
         $permission = Permission::create(['name' => 'bookings.delete']);
         $adminRole->givePermissionTo($permission);
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // create service permission
+        $permission = Permission::create(['name' => 'promocodes.create']);
+        $adminRole->givePermissionTo($permission);
+
+        // index service permission
+        $permission = Permission::create(['name' => 'promocodes.index']);
+        $adminRole->givePermissionTo($permission);
+
+        // show service permission
+        $permission = Permission::create(['name' => 'promocodes.show']);
+        $adminRole->givePermissionTo($permission);
+
+        // update service permission
+        $permission = Permission::create(['name' => 'promocodes.update']);
+        $adminRole->givePermissionTo($permission);
+
+        // delete service permission
+        $permission = Permission::create(['name' => 'promocodes.delete']);
+        $adminRole->givePermissionTo($permission);
     }
 }

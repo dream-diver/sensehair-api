@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
 {
+    use HasFactory;
+
     /**
      * The attributes that are not mass assignable.
      *
      * @var string[]
      */
     protected $guarded = [];
-
-    use HasFactory;
 
     /**
      * The attributes that should be cast.
@@ -55,8 +55,17 @@ class Booking extends Model
     /**
      * All the Services that this booking has
      */
-    public function services ()
+    public function services()
     {
         return $this->belongsToMany(Service::class);
+    }
+
+
+    /**
+     * The promocode that was used in this booking
+     */
+    public function promocode()
+    {
+        return $this->belongsTo(PromotionCode::class, 'promocode_id');
     }
 }
