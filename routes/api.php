@@ -23,6 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('login', [App\Http\Controllers\Api\Auth\AuthController::class, 'login']);
 // Route::middleware('guest')->group(function(){
 // });
+Route::get('bookings/{booking}/getPaymentIntent', [App\Http\Controllers\Api\BookingPaymentController::class, 'getPaymentIntent']);
+Route::get('bookings/submitPaymentSuccess', [App\Http\Controllers\Api\BookingPaymentController::class, 'submitPaymentSuccess']);
 
 Route::middleware('auth:sanctum')->group(function () {
     // Route::group(['middleware' => ['role:admin']], function () {

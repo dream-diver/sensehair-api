@@ -26,6 +26,7 @@ class CreateBookingsTable extends Migration
 
             $table->string("stripe_client_secret")->nullable();
             $table->string("stripe_id")->nullable();
+            $table->string('payment_status')->default('Unpaid');
 
             $table->foreign('customer_id')->references('id')->on('users');
             $table->foreign('server_id')->references('id')->on('users');

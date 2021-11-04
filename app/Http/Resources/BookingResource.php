@@ -21,6 +21,7 @@ class BookingResource extends JsonResource
                 'booking_time' => $this->booking_time->format('Y-m-d H:i'),
                 'charge' => $this->charge,
                 'duration' => $this->duration,
+                'payment_status' => $this->payment_status,
 
                 'customer_id' => $this->customer_id,
                 'server_id' => $this->server_id,
