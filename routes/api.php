@@ -27,6 +27,7 @@ Route::post('register', [App\Http\Controllers\Api\Auth\AuthController::class, 'r
 Route::post('guest/bookings', [App\Http\Controllers\Api\GuestBookingsController::class, 'store']);
 Route::get('bookings/{booking}/getPaymentIntent', [App\Http\Controllers\Api\BookingPaymentController::class, 'getPaymentIntent']);
 Route::get('bookings/submitPaymentSuccess', [App\Http\Controllers\Api\BookingPaymentController::class, 'submitPaymentSuccess']);
+Route::get('getPromocodeFromCode/{code}', App\Http\Controllers\Api\PromocodeDetailsFromCodeController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
     // Route::group(['middleware' => ['role:admin']], function () {
