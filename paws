@@ -1,0 +1,1 @@
+ssh -i ~/pem_files/sensehair-prod.pem ubuntu@ec2-3-143-178-184.us-east-2.compute.amazonaws.com
