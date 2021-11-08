@@ -22,6 +22,7 @@ class UsersController extends Controller
     public function __construct(UsersRepository $usersRepository)
     {
         $this->repository = $usersRepository;
+        $this->middleware('auth:sanctum')->except('index');
     }
 
     /**

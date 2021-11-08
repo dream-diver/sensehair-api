@@ -30,9 +30,9 @@ Route::get('bookings/submitPaymentSuccess', [App\Http\Controllers\Api\BookingPay
 Route::get('getPromocodeFromCode/{code}', App\Http\Controllers\Api\PromocodeDetailsFromCodeController::class);
 
 Route::apiResource('services', App\Http\Controllers\Api\ServicesController::class);
+Route::apiResource('users', App\Http\Controllers\Api\UsersController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('users', App\Http\Controllers\Api\UsersController::class);
     Route::apiResource('bookings', App\Http\Controllers\Api\BookingsController::class);
     Route::apiResource('promocodes', App\Http\Controllers\Api\PromocodesController::class);
 
