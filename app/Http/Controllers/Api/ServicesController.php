@@ -20,6 +20,7 @@ class ServicesController extends Controller
     public function __construct(ServicesRepository $servicesRepository)
     {
         $this->repository = $servicesRepository;
+        $this->middleware('auth:sanctum')->except('index');
     }
 
     /**
