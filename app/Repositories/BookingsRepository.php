@@ -18,6 +18,30 @@ class BookingsRepository extends BaseRepository
     }
 
     /**
+     * get all the items collection from database table using model.
+     *
+     * @return Collection of items.
+     */
+    public function get(Request $request)
+    {
+        $model = $this->model;
+
+        if ($request->has('year')) {
+            $model = $model->whereYear('booking_time', '=', $request->year);
+        }
+
+        if ($request->has('month')) {
+            // return Booking::where('id', '=', 1)->get();
+            $model = $model->whereMonth('booking_time', '=', $request->month);
+        }
+
+
+        return $model
+            ->orderBy($request->input('orderBy', 'created_at'), $request->input('sort', 'desc'))
+            ->get();
+    }
+
+    /**
      * create new Booking in database.
      *
      * @param Request $request Illuminate\Http\Request

@@ -31,7 +31,11 @@ class BookingsController extends Controller
     {
         $this->authorize('viewAny', App\Models\Booking::class);
 
-        $bookings = $this->repository->paginate($request);
+        if($request->limit == 'all') {
+            $bookings = $this->repository->get($request);
+        } else {
+            $bookings = $this->repository->paginate($request);
+        }
 
         return BookingResource::collection($bookings);
     }
