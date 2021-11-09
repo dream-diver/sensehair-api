@@ -26,6 +26,10 @@ class BookingsRepository extends BaseRepository
     {
         $model = $this->model;
 
+        if ($request->has('server_id')) {
+            $model = $model->where('server_id', $request->server_id);
+        }
+
         if ($request->has('year')) {
             $model = $model->whereYear('booking_time', '=', $request->year);
         }
