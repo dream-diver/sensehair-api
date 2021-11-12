@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\Models\User;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UsersRepository extends BaseRepository
 {
@@ -88,7 +89,16 @@ class UsersRepository extends BaseRepository
         } else {
             $attributes = $request->validated();
         }
+
         $attributes['password'] = bcrypt($request->password);
+
+        if(isset($attributes['avatar'])) {
+            $path = $attributes['avatar']->store('images');
+            Storage::setVisibility($path, 'public');
+            $attributes['avatar_path'] = Storage::url($path);
+            unset($attributes['avatar']);
+        }
+
         return $attributes;
     }
 }

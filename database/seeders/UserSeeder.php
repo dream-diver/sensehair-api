@@ -32,12 +32,18 @@ class UserSeeder extends Seeder
                 $user->assignRole('customer');
             });
 
-            User::factory()->count(10)->create()->each(function($user){
+            User::factory()->count(5)->create()->each(function($user){
                 $user->assignRole('stylist');
+                $user->update([
+                    'avatar_path' => env('APP_URL') . '/hisoka.jpg'
+                ]);
             });
 
-            User::factory()->count(10)->create()->each(function($user){
+            User::factory()->count(5)->create()->each(function($user){
                 $user->assignRole('art_director');
+                $user->update([
+                    'avatar_path' => env('APP_URL') . '/hisoka.jpg'
+                ]);
             });
         }
     }
