@@ -14,7 +14,8 @@ class UserUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->hasPermissionTo('users.update');
+        $user = $this->route('user');
+        return (Auth::user()->hasPermissionTo('users.update') || Auth::id() == $user->id);
     }
 
     /**

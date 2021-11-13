@@ -53,7 +53,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->hasPermissionTo('users.update');
+        return ($user->hasPermissionTo('users.update') || $user->id == $model->id);
     }
 
     /**
