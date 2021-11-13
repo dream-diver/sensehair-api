@@ -90,7 +90,9 @@ class UsersRepository extends BaseRepository
             $attributes = $request->validated();
         }
 
-        $attributes['password'] = bcrypt($request->password);
+        if(isset($attributes['password'])) {
+            $attributes['password'] = bcrypt($request->password);
+        }
 
         if(isset($attributes['avatar'])) {
             $path = $attributes['avatar']->store('images');
