@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PromocodeResource;
 use App\Models\Promocode;
+use App\Util\HandleResponse;
 use Illuminate\Http\Request;
 
 class PromocodeDetailsFromCodeController extends Controller
 {
+    use HandleResponse;
     /**
      * Handle the incoming request.
      *
@@ -18,6 +20,10 @@ class PromocodeDetailsFromCodeController extends Controller
     public function __invoke(String $code, Request $request)
     {
         $promocode = Promocode::where('code', $code)->first();
+
+        if(!$promocode) {
+            return $this->respondNotFound(['message' => 'Promocode Does not exist.']);
+        }
 
         return new PromocodeResource($promocode);
     }
