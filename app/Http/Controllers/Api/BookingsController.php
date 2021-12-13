@@ -7,6 +7,7 @@ use App\Http\Requests\BookingStoreRequest;
 use App\Http\Requests\BookingUpdateRequest;
 use App\Http\Resources\BookingResource;
 use App\Models\Booking;
+use App\Notifications\BookingCreatedNotification;
 use App\Repositories\BookingsRepository;
 use App\Util\HandleResponse;
 use Illuminate\Http\Request;
@@ -52,6 +53,7 @@ class BookingsController extends Controller
 
         try {
             $booking = $this->repository->store($request);
+            auth()->user()->notify(new BookingCreatedNotification($booking));
             return $this->respondCreated(['booking' => new BookingResource($booking)]);
         } catch (\Exception $e) {
             return $this->respondServerError(['message' => $e->getMessage()]);
