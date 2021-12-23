@@ -26,6 +26,7 @@ class ServiceUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
+            'name_en' => ['required', 'string'],
             'duration' => ['required', 'string'],
 
             'stylist_price' => ['required', 'string'],

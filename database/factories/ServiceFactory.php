@@ -25,9 +25,11 @@ class ServiceFactory extends Factory
         $hairTypes = ['Straight', 'Wavy', 'Curly', 'Coily'];
 
         $hairSizeIndex = rand(0, 3);
+        $name = $this->faker->word();
 
         return [
-            'name' => $this->faker->word(),
+            'name' => $name,
+            'name_en' => $name . ' EN',
             'duration' => rand(20, 60),
 
             'stylist_price' => $this->faker->randomFloat(null, 10, 100),
