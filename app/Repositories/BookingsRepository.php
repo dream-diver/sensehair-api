@@ -39,6 +39,10 @@ class BookingsRepository extends BaseRepository
             $model = $model->whereMonth('booking_time', '=', $request->month);
         }
 
+        if ($request->user()->hasRole('admin')) {
+            $model = $model->with('services');
+        }
+
 
         return $model
             ->orderBy($request->input('orderBy', 'created_at'), $request->input('sort', 'desc'))
