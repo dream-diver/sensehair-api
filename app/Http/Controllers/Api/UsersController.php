@@ -34,7 +34,7 @@ class UsersController extends Controller
     {
         $this->authorize('viewAny', App\Models\User::class);
 
-        if($request->limit == 'all') {
+        if ($request->limit == 'all') {
             $users = $this->repository->get($request);
         } else {
             $users = $this->repository->paginate($request);
