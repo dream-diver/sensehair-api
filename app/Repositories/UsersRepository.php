@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\User;
@@ -24,7 +25,7 @@ class UsersRepository extends BaseRepository
     {
         $model = $this->model;
 
-        if($request->has('role')){
+        if ($request->has('role')) {
             $model = $model->role($request->role);
         }
 
@@ -42,7 +43,7 @@ class UsersRepository extends BaseRepository
     {
         $model = $this->model;
 
-        if($request->has('role')){
+        if ($request->has('role')) {
             $model = $model->role($request->role);
         }
 
@@ -67,7 +68,7 @@ class UsersRepository extends BaseRepository
 
         if ($request->role == 'stylist') {
             $user->assignRole('stylist');
-        } else if ($request->role == 'art_director') {
+        } elseif ($request->role == 'art_director') {
             $user->assignRole('art_director');
         } else {
             $user->assignRole('customer');
@@ -90,11 +91,13 @@ class UsersRepository extends BaseRepository
             $attributes = $request->validated();
         }
 
-        if(isset($attributes['password'])) {
+        if (isset($attributes['password'])) {
             $attributes['password'] = bcrypt($request->password);
+        } else {
+            $attributes['password'] = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
         }
 
-        if(isset($attributes['avatar'])) {
+        if (isset($attributes['avatar'])) {
             $path = $attributes['avatar']->store('images');
             Storage::setVisibility($path, 'public');
             $attributes['avatar_path'] = Storage::url($path);
