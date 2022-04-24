@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Twilio\TwilioChannel;
-use NotificationChannels\Twilio\TwilioMmsMessage;
+use NotificationChannels\Twilio\TwilioSmsMessage;
 
 class BookingCreatedNotification extends Notification implements ShouldQueue
 {
@@ -50,7 +50,7 @@ class BookingCreatedNotification extends Notification implements ShouldQueue
 
     public function toTwilio($notifiable)
     {
-        return (new TwilioMmsMessage())
+        return (new TwilioSmsMessage())
             ->content("You have an appointment with Sense Hair on {$this->booking->booking_time->toDateString()} at {$this->booking->booking_time->format('H:i')} at Central Plaza 12. See you there!");
     }
 
