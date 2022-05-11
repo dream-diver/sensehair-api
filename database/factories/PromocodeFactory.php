@@ -24,6 +24,8 @@ class PromocodeFactory extends Factory
         return [
             'code' => $this->faker->word(),
             'discount' => rand(10, 50),
+            'start_date'=> now(),
+            'end_date'=> now()->addDays(10),
         ];
     }
 }

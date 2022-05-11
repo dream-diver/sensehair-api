@@ -25,21 +25,14 @@ class UsersController extends Controller
         $this->middleware('auth:sanctum')->except('index');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $this->authorize('viewAny', App\Models\User::class);
-
         if ($request->limit == 'all') {
             $users = $this->repository->get($request);
         } else {
             $users = $this->repository->paginate($request);
         }
-
         return UserResource::collection($users);
     }
 

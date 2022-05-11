@@ -6,7 +6,7 @@ use App\Models\Promocode;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 class BookingsRepository extends BaseRepository
 {
@@ -47,6 +47,28 @@ class BookingsRepository extends BaseRepository
         return $model
             ->orderBy($request->input('orderBy', 'created_at'), $request->input('sort', 'desc'))
             ->get();
+    }
+
+    public function getSearchData(Request $request)
+    {
+        $model = $this->model;
+        if ($request->has('search')) {
+            $search = request('search');
+            $model = $model->with('customer')->with('server')
+                ->whereHas('customer', function (Builder $query) use ($search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                })
+                ->orWhereHas('server', function (Builder $query) use ($search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                });
+            return $model
+                ->orderBy($request->input('orderBy', 'created_at'), $request->input('sort', 'desc'))
+                ->get();
+        } else {
+            return $model
+                ->orderBy($request->input('orderBy', 'created_at'), $request->input('sort', 'desc'))
+                ->paginate($request->input('limit', 10));
+        }
     }
 
     /**

@@ -24,11 +24,18 @@ class UsersRepository extends BaseRepository
     public function get(Request $request)
     {
         $model = $this->model;
-
         if ($request->has('role')) {
             $model = $model->role($request->role);
         }
+        return $model
+            ->orderBy($request->input('orderBy', 'created_at'), $request->input('sort', 'desc'))
+            ->get();
+    }
 
+    public function getOneList(Request $request, $id)
+    {
+        $model = $this->model;
+        $model = $model->where('id',$id);
         return $model
             ->orderBy($request->input('orderBy', 'created_at'), $request->input('sort', 'desc'))
             ->get();

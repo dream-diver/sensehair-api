@@ -16,6 +16,8 @@ class CreatePromocodesTable extends Migration
         Schema::create('promocodes', function (Blueprint $table) {
             $table->id();
             $table->string('code');
+            $table->timestamp('start_date');
+            $table->timestamp('end_date');
             $table->tinyInteger('discount'); // percentage
             $table->timestamps();
         });

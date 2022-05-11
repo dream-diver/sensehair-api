@@ -35,7 +35,7 @@ class BookingsController extends Controller
         if ($request->limit == 'all') {
             $bookings = $this->repository->get($request);
         } else {
-            $bookings = $this->repository->paginate($request);
+            $bookings = $this->repository->getSearchData($request);
         }
 
         return BookingResource::collection($bookings);
@@ -56,6 +56,7 @@ class BookingsController extends Controller
             auth()->user()->notify(new BookingCreatedNotification($booking));
             return $this->respondCreated(['booking' => new BookingResource($booking)]);
         } catch (\Exception $e) {
+
             return $this->respondServerError(['message' => $e->getMessage()]);
         }
     }
@@ -108,6 +109,17 @@ class BookingsController extends Controller
             return $this->respondNoContent();
         } catch (\Exception $e) {
             return $this->respondServerError(['message' => $e->getMessage()]);
+        }
+    }
+
+    public function testMail(Request $request)
+    {
+        try {
+            $booking = Booking::find(27);
+            auth()->user()->notify(new BookingCreatedNotification($booking));
+            return "Notified";
+        } catch (\Throwable $th) {
+            throw $th;
         }
     }
 }

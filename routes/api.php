@@ -32,7 +32,9 @@ Route::get('getPromocodeFromCode/{code}', App\Http\Controllers\Api\PromocodeDeta
 Route::apiResource('services', App\Http\Controllers\Api\ServicesController::class);
 Route::apiResource('users', App\Http\Controllers\Api\UsersController::class);
 
+
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/test/email',[App\Http\Controllers\Api\BookingsController::class,'testMail']);
     Route::apiResource('bookings', App\Http\Controllers\Api\BookingsController::class);
     Route::apiResource('promocodes', App\Http\Controllers\Api\PromocodesController::class);
 

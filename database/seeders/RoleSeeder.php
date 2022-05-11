@@ -75,6 +75,7 @@ class RoleSeeder extends Seeder
         // index booking permission
         $permission = Permission::create(['name' => 'bookings.index']);
         $adminRole->givePermissionTo($permission);
+        $stylistRole->givePermissionTo($permission);
 
         // show booking permission
         $permission = Permission::create(['name' => 'bookings.show']);
