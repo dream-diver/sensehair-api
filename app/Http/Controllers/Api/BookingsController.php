@@ -53,7 +53,7 @@ class BookingsController extends Controller
 
         try {
             $booking = $this->repository->store($request);
-            // auth()->user()->notify(new BookingCreatedNotification($booking));
+            auth()->user()->notify(new BookingCreatedNotification($booking));
             return $this->respondCreated(['booking' => new BookingResource($booking)]);
         } catch (\Exception $e) {
             return $this->respondServerError(['message' => $e->getMessage()]);
