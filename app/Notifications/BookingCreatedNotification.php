@@ -33,7 +33,7 @@ class BookingCreatedNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return $notifiable->phone ? ['mail', TwilioChannel::class] : ['mail'];
+        return [TwilioChannel::class];
     }
 
     /**
@@ -42,11 +42,11 @@ class BookingCreatedNotification extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
-    {
-        return (new MailMessage())
-            ->line("You have an appointment with Sense Hair on {$this->booking->booking_time->toDateString()} at {$this->booking->booking_time->format('H:i')} at Central Plaza 12. See you there!");
-    }
+    // public function toMail($notifiable)
+    // {
+    //     return (new MailMessage())
+    //         ->line("You have an appointment with Sense Hair on {$this->booking->booking_time->toDateString()} at {$this->booking->booking_time->format('H:i')} at Central Plaza 12. See you there!");
+    // }
     
     public function toTwilio($notifiable)
     {

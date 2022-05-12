@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BookingStoreRequest;
 use App\Http\Requests\BookingUpdateRequest;
 use App\Http\Resources\BookingResource;
+use App\Mail\BookingSuccessful;
 use App\Models\Booking;
 use App\Notifications\BookingCreatedNotification;
 use App\Repositories\BookingsRepository;
 use App\Util\HandleResponse;
 use Illuminate\Http\Request;
-
+use Mail;
+use Dotunj\LaraTwilio\Facades\LaraTwilio;
 class BookingsController extends Controller
 {
     use HandleResponse;
@@ -53,7 +55,11 @@ class BookingsController extends Controller
 
         try {
             $booking = $this->repository->store($request);
-            auth()->user()->notify(new BookingCreatedNotification($booking));
+            
+            $email = auth()->user()->email;
+            $message = "You have an appointment with Sense Hair on ".$booking->booking_time->toDateString(). " at " .$booking->booking_time->format('H:i'). " at Central Plaza 12. See you there!";
+            Mail::to($email)->send(new BookingSuccessful($booking));
+            LaraTwilio::notify('+8801521323474', $message);
             return $this->respondCreated(['booking' => new BookingResource($booking)]);
         } catch (\Exception $e) {
 
@@ -114,12 +120,24 @@ class BookingsController extends Controller
 
     public function testMail(Request $request)
     {
-        try {
-            $booking = Booking::find(27);
-            auth()->user()->notify(new BookingCreatedNotification($booking));
-            return "Notified";
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+        $booking = Booking::first();
+        $email = auth()->user()->email;
+        $message = "You have an appointment with Sense Hair on ".$booking->booking_time->toDateString(). " at " .$booking->booking_time->format('H:i'). " at Central Plaza 12. See you there!";
+        Mail::to($email)->send(new BookingSuccessful($booking));
+        LaraTwilio::notify('+8801521323474', $message);
+
+
+        // auth()->user()->notify(new BookingCreatedNotification($booking));
+        // $data = array('name'=>env('MAIL_FROM_NAME'),'booking'=>$booking);
+    
+	    // Mail::send(['text'=>'mail.notify'], $data, function($message) use($email){
+	    //     $message->to($email)->subject('Booking Seuccessful');
+	    //     $message->from(env('MAIL_FROM_ADDRESS'));
+	    // });
+        // try {
+        //     // return "Notified".env('MEMCACHED_HOST');
+        // } catch (\Throwable $th) {
+        //     throw $th;
+        // }
     }
 }

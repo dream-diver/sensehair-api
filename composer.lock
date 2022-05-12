@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca3d6bf4bc865497c2b7116a43efa163",
+    "content-hash": "312c1c6b76c191110f3cc3c436299c61",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -429,6 +429,55 @@
                 }
             ],
             "time": "2022-02-28T11:07:21+00:00"
+        },
+        {
+            "name": "dotunj/laratwilio",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dotunj/laratwilio.git",
+                "reference": "788e374f99da987516f73fae0a50389ff6d0eed2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dotunj/laratwilio/zipball/788e374f99da987516f73fae0a50389ff6d0eed2",
+                "reference": "788e374f99da987516f73fae0a50389ff6d0eed2",
+                "shasum": ""
+            },
+            "require": {
+                "twilio/sdk": "^5.42"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Dotunj\\LaraTwilio\\LaraTwilioServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaraTwilio": "Dotunj\\LaraTwilio\\Facades\\LaraTwilio"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dotunj\\LaraTwilio\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Dotun",
+                    "email": "dotunjolaosho@gmail.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/Dotunj/laratwilio/issues",
+                "source": "https://github.com/Dotunj/laratwilio/tree/master"
+            },
+            "time": "2020-02-03T01:10:59+00:00"
         },
         {
             "name": "dragonmantank/cron-expression",
@@ -1043,7 +1092,7 @@
                 "illuminate/queue": "^5.8 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
                 "illuminate/support": "^5.8 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
                 "php": ">=7.2|^8.0",
-                "twilio/sdk": "~6.0"
+                "twilio/sdk": "^5.42"
             },
             "require-dev": {
                 "mockery/mockery": "^1.3",
@@ -5392,24 +5441,25 @@
         },
         {
             "name": "twilio/sdk",
-            "version": "6.37.0",
+            "version": "5.42.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twilio/twilio-php.git",
-                "reference": "72d4053d9d9f727f5d5490daca24ba035e279c31"
+                "reference": "0cfcb871b18a9c427dd9e8f0ed7458d43009b48a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/72d4053d9d9f727f5d5490daca24ba035e279c31",
-                "reference": "72d4053d9d9f727f5d5490daca24ba035e279c31",
+                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/0cfcb871b18a9c427dd9e8f0ed7458d43009b48a",
+                "reference": "0cfcb871b18a9c427dd9e8f0ed7458d43009b48a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1.0"
+                "php": ">=5.5.0"
             },
             "require-dev": {
-                "guzzlehttp/guzzle": "^6.3 || ^7.0",
-                "phpunit/phpunit": ">=7.0"
+                "apigen/apigen": "^4.1",
+                "guzzlehttp/guzzle": "^6.3",
+                "phpunit/phpunit": ">=4.5"
             },
             "suggest": {
                 "guzzlehttp/guzzle": "An HTTP client to execute the API requests"
@@ -5431,7 +5481,7 @@
                 }
             ],
             "description": "A PHP wrapper for Twilio's API",
-            "homepage": "https://github.com/twilio/twilio-php",
+            "homepage": "http://github.com/twilio/twilio-php",
             "keywords": [
                 "api",
                 "sms",
@@ -5439,9 +5489,9 @@
             ],
             "support": {
                 "issues": "https://github.com/twilio/twilio-php/issues",
-                "source": "https://github.com/twilio/twilio-php/tree/6.37.0"
+                "source": "https://github.com/twilio/twilio-php/tree/5.42.2"
             },
-            "time": "2022-05-04T19:20:43+00:00"
+            "time": "2020-02-05T19:55:13+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
