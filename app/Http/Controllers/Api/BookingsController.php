@@ -14,6 +14,8 @@ use App\Util\HandleResponse;
 use Illuminate\Http\Request;
 use Mail;
 use Dotunj\LaraTwilio\Facades\LaraTwilio;
+use Illuminate\Support\Facades\DB;
+
 class BookingsController extends Controller
 {
     use HandleResponse;
@@ -25,11 +27,7 @@ class BookingsController extends Controller
         $this->repository = $bookingsRepository;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
         $this->authorize('viewAny', App\Models\Booking::class);
@@ -43,36 +41,21 @@ class BookingsController extends Controller
         return BookingResource::collection($bookings);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(BookingStoreRequest $request)
     {
         $this->authorize('create', App\Models\Booking::class);
-
         try {
             $booking = $this->repository->store($request);
-            
             $email = auth()->user()->email;
             $message = "You have an appointment with Sense Hair on ".$booking->booking_time->toDateString(). " at " .$booking->booking_time->format('H:i'). " at Central Plaza 12. See you there!";
             Mail::to($email)->send(new BookingSuccessful($booking));
-            LaraTwilio::notify('+8801521323474', $message);
-            return $this->respondCreated(['booking' => new BookingResource($booking)]);
+            LaraTwilio::notify(auth()->user()->phone, $message);
         } catch (\Exception $e) {
-
             return $this->respondServerError(['message' => $e->getMessage()]);
         }
+        return $this->respondCreated(['booking' => new BookingResource($booking)]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show(Booking $booking)
     {
         $this->authorize('view', $booking);
@@ -81,13 +64,6 @@ class BookingsController extends Controller
         return $this->respondOk(['booking' => new BookingResource($booking)]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
     public function update(BookingUpdateRequest $request, Booking $booking)
     {
         $this->authorize('update', $booking);
@@ -100,12 +76,6 @@ class BookingsController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Booking $booking)
     {
         $this->authorize('delete', $booking);
