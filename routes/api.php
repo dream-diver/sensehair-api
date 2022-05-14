@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Auth Routes
 Route::post('login', [App\Http\Controllers\Api\Auth\AuthController::class, 'login']);
 Route::post('register', [App\Http\Controllers\Api\Auth\AuthController::class, 'register']);
+Route::post('auth/forget-password', [App\Http\Controllers\Api\ForgotPasswordController::class, 'forgot']);
 // Route::middleware('guest')->group(function(){
 // });
 Route::post('guest/bookings', [App\Http\Controllers\Api\GuestBookingsController::class, 'store']);
@@ -31,7 +32,6 @@ Route::get('getPromocodeFromCode/{code}', App\Http\Controllers\Api\PromocodeDeta
 
 Route::apiResource('services', App\Http\Controllers\Api\ServicesController::class);
 Route::apiResource('users', App\Http\Controllers\Api\UsersController::class);
-
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/test/email',[App\Http\Controllers\Api\BookingsController::class,'testMail']);

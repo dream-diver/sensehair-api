@@ -34,10 +34,12 @@ class RoleSeeder extends Seeder
         // show user permission
         $permission = Permission::create(['name' => 'users.show']);
         $adminRole->givePermissionTo($permission);
+        $customerRole->givePermissionTo($permission);
 
         // update user permission
         $permission = Permission::create(['name' => 'users.update']);
         $adminRole->givePermissionTo($permission);
+        $customerRole->givePermissionTo($permission);
 
         // delete user permission
         $permission = Permission::create(['name' => 'users.delete']);

@@ -48,8 +48,12 @@ class BookingsController extends Controller
             $booking = $this->repository->store($request);
             $email = auth()->user()->email;
             $message = "You have an appointment with Sense Hair on ".$booking->booking_time->toDateString(). " at " .$booking->booking_time->format('H:i'). " at Central Plaza 12. See you there!";
-            Mail::to($email)->send(new BookingSuccessful($booking));
-            LaraTwilio::notify(auth()->user()->phone, $message);
+            try {
+                Mail::to($email)->send(new BookingSuccessful($booking));
+                LaraTwilio::notify(auth()->user()->phone, $message);
+            } catch (\Throwable $th) {
+                
+            }
         } catch (\Exception $e) {
             return $this->respondServerError(['message' => $e->getMessage()]);
         }
