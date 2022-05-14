@@ -70,6 +70,17 @@
             background: lightgray;
         }
 
+        .logButton {
+            background-color: coral;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            border-radius: 5px;
+            color: whitesmoke;
+            text-decoration: none
+        }
+
     </style>
 </head>
 
@@ -77,7 +88,7 @@
     <div class="flex-center position-ref full-height">
         <div style="text-align: center">
             <h1>Password reset successfull</h1>
-            <a style="background-color: coral; padding-top: 0.5rem;padding-bottom: 0.5rem; padding-left:1rem; padding-right:1rem; border-radius:5px; color:whitesmoke;text-decoration: none" href="http://localhost:3000/login"> Login </a>
+            <a class="logButton" href="https://sense-hair.netlify.app/login"> Login </a>
         </div>
     </div>
 </body>
