@@ -25,6 +25,8 @@ Route::post('register', [App\Http\Controllers\Api\Auth\AuthController::class, 'r
 Route::post('auth/forget-password', [App\Http\Controllers\Api\ForgotPasswordController::class, 'forgot']);
 // Route::middleware('guest')->group(function(){
 // });
+Route::post('service/populate', [App\Http\Controllers\Api\ServicesController::class, 'addManyService']);
+
 Route::post('guest/bookings', [App\Http\Controllers\Api\GuestBookingsController::class, 'store']);
 Route::get('bookings/{booking}/getPaymentIntent', [App\Http\Controllers\Api\BookingPaymentController::class, 'getPaymentIntent']);
 Route::get('bookings/submitPaymentSuccess', [App\Http\Controllers\Api\BookingPaymentController::class, 'submitPaymentSuccess']);
@@ -34,7 +36,7 @@ Route::apiResource('services', App\Http\Controllers\Api\ServicesController::clas
 Route::apiResource('users', App\Http\Controllers\Api\UsersController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/test/email',[App\Http\Controllers\Api\BookingsController::class,'testMail']);
+    Route::get('/test/email', [App\Http\Controllers\Api\BookingsController::class, 'testMail']);
     Route::apiResource('bookings', App\Http\Controllers\Api\BookingsController::class);
     Route::apiResource('promocodes', App\Http\Controllers\Api\PromocodesController::class);
     Route::post('bookings/cancel', [App\Http\Controllers\Api\BookingsController::class, 'destroy']);
