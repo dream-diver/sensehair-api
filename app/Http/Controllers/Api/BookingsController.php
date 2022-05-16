@@ -92,6 +92,17 @@ class BookingsController extends Controller
         }
     }
 
+    public function cancel(Request $request)
+    {
+        $booking = Booking::find($request->booking_id);
+        try {
+            $this->repository->delete($booking);
+            return $this->respondNoContent();
+        } catch (\Exception $e) {
+            return $this->respondServerError(['message' => $e->getMessage()]);
+        }
+    }
+
     public function testMail(Request $request)
     {
         $booking = Booking::first();

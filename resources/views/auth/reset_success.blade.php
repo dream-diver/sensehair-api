@@ -88,7 +88,8 @@
     <div class="flex-center position-ref full-height">
         <div style="text-align: center">
             <h1>Password reset successfull</h1>
-            <a class="logButton" href="https://sense-hair.netlify.app/login"> Login </a>
+            {{-- <a class="logButton" href="https://sense-hair.netlify.app/login"> Login </a> --}}
+            <a class="logButton" href="http://localhost:3000/login"> Login </a>
         </div>
     </div>
 </body>

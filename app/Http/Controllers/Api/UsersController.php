@@ -45,8 +45,16 @@ class UsersController extends Controller
     public function store(UserStoreRequest $request)
     {
         $this->authorize('create', App\Models\User::class);
+        // try {
+        //     $file = $request->file('avatar');
 
+        //     $imageName = $file->getClientOriginalName();
+        //     $file->move(public_path('images'), $imageName);
+        // } catch (\Throwable $th) {
+
+        // }
         try {
+
             $user = $this->repository->store($request);
             return $this->respondCreated(['user' => new UserResource($user)]);
             // return response()->json( ['user' => new UserResource($user)], Response::HTTP_CREATED);
