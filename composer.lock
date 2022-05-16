@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "312c1c6b76c191110f3cc3c436299c61",
+    "content-hash": "b307da83798ff6c8571def511a25e9b9",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -114,16 +114,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.222.9",
+            "version": "3.222.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "cb1db65be035cc90de1019391bc3a57ca3cb1762"
+                "reference": "a82c1b4903f5df893bf7108ec9de73328f74652a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/cb1db65be035cc90de1019391bc3a57ca3cb1762",
-                "reference": "cb1db65be035cc90de1019391bc3a57ca3cb1762",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a82c1b4903f5df893bf7108ec9de73328f74652a",
+                "reference": "a82c1b4903f5df893bf7108ec9de73328f74652a",
                 "shasum": ""
             },
             "require": {
@@ -199,9 +199,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.222.9"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.222.10"
             },
-            "time": "2022-05-10T18:14:43+00:00"
+            "time": "2022-05-11T18:15:28+00:00"
         },
         {
             "name": "brick/math",
@@ -1071,79 +1071,6 @@
                 }
             ],
             "time": "2022-03-20T21:55:58+00:00"
-        },
-        {
-            "name": "laravel-notification-channels/twilio",
-            "version": "3.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel-notification-channels/twilio.git",
-                "reference": "c14bafbd59d59aed94e73cb83d89c0d33ad88c79"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel-notification-channels/twilio/zipball/c14bafbd59d59aed94e73cb83d89c0d33ad88c79",
-                "reference": "c14bafbd59d59aed94e73cb83d89c0d33ad88c79",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/events": "^5.8 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
-                "illuminate/notifications": "^5.8 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
-                "illuminate/queue": "^5.8 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
-                "illuminate/support": "^5.8 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
-                "php": ">=7.2|^8.0",
-                "twilio/sdk": "^5.42"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.3",
-                "orchestra/testbench": "^3|^4|^5|^6|^7",
-                "phpunit/phpunit": "^8.5|^9.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "NotificationChannels\\Twilio\\TwilioProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "NotificationChannels\\Twilio\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Gregorio Hernández Caso",
-                    "email": "gregoriohc@gmail.com",
-                    "homepage": "https://github.com/gregoriohc",
-                    "role": "Developer"
-                },
-                {
-                    "name": "atymic",
-                    "email": "atymicq@gmail.com",
-                    "homepage": "https://atymic.dev",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Provides Twilio notification channel for Laravel",
-            "keywords": [
-                "call",
-                "laravel",
-                "mms",
-                "notification",
-                "sms",
-                "twilio"
-            ],
-            "support": {
-                "issues": "https://github.com/laravel-notification-channels/twilio/issues",
-                "source": "https://github.com/laravel-notification-channels/twilio"
-            },
-            "time": "2022-02-14T03:01:56+00:00"
         },
         {
             "name": "laravel/framework",

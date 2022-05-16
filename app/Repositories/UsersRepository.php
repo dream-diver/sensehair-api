@@ -35,7 +35,7 @@ class UsersRepository extends BaseRepository
     public function getOneList(Request $request, $id)
     {
         $model = $this->model;
-        $model = $model->where('id',$id);
+        $model = $model->where('id', $id);
         return $model
             ->orderBy($request->input('orderBy', 'created_at'), $request->input('sort', 'desc'))
             ->get();
@@ -105,9 +105,12 @@ class UsersRepository extends BaseRepository
         }
 
         if (isset($attributes['avatar'])) {
-            $path = $attributes['avatar']->store('images');
-            Storage::setVisibility($path, 'public');
-            $attributes['avatar_path'] = Storage::url($path);
+            // $path = $attributes['avatar']->store('images');
+            // Storage::setVisibility($path, 'public');
+            $file = $request->file('avatar');
+            $imageName = $file->getClientOriginalName();
+            $file->move(public_path('images'), $imageName);
+            $attributes['avatar_path'] = url('/')."/images/".$imageName;
             unset($attributes['avatar']);
         }
 
