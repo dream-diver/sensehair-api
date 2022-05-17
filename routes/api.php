@@ -25,7 +25,6 @@ Route::post('register', [App\Http\Controllers\Api\Auth\AuthController::class, 'r
 Route::post('auth/forget-password', [App\Http\Controllers\Api\ForgotPasswordController::class, 'forgot']);
 // Route::middleware('guest')->group(function(){
 // });
-Route::post('service/populate', [App\Http\Controllers\Api\ServicesController::class, 'addManyService']);
 
 Route::post('guest/bookings', [App\Http\Controllers\Api\GuestBookingsController::class, 'store']);
 Route::get('bookings/{booking}/getPaymentIntent', [App\Http\Controllers\Api\BookingPaymentController::class, 'getPaymentIntent']);

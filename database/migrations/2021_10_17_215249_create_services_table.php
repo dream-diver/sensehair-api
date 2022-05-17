@@ -14,7 +14,7 @@ class CreateServicesTable extends Migration
     public function up()
     {
         Schema::create('services', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name');
             $table->string('name_en');
             $table->integer('duration'); // in minutes
@@ -23,8 +23,13 @@ class CreateServicesTable extends Migration
             $table->float('art_director_price');
 
             $table->string('hair_size');
+            $table->string('hair_size_nl');
             $table->string('hair_type')->nullable();
-
+            $table->string('hair_type_nl')->nullable();
+            
+            $table->string('category');
+            $table->string('category_en');
+            
             $table->softDeletes();
             $table->timestamps();
         });

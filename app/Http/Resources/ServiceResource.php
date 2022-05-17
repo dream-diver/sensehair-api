@@ -20,12 +20,16 @@ class ServiceResource extends JsonResource
                 'name' => $this->name,
                 'name_en' => $this->name_en,
                 'duration' => $this->duration,
+                'category' => $this->category,
+                'category_en' => $this->category_en,
 
                 'stylist_price' => $this->stylist_price,
                 'art_director_price' => $this->art_director_price,
 
                 'hair_size' => $this->hair_size,
                 'hair_type' => $this->hair_type,
+                'hair_size_nl' => $this->hair_size_nl,
+                'hair_type_nl' => $this->hair_type_nl,
 
 				'updated_at' => $this->updated_at->format('d/m/Y h:ia'),
 				'created_at' => $this->created_at->format('d/m/Y h:ia'),

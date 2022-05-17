@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Service;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ServicesRepository extends BaseRepository
 {
@@ -23,12 +25,18 @@ class ServicesRepository extends BaseRepository
     {
         $model = $this->model;
 
-        if($request->has('hair_size')) {
+        if ($request->has('hair_size')) {
             $model = $model->where('hair_size', '=', $request->hair_size);
         }
 
-        if($request->has('hair_type')) {
+        if ($request->has('hair_type')) {
             $model = $model->where('hair_type', '=', $request->hair_type);
+        }
+
+        if ($request->has('group_by')) {
+            // dd("error");
+            return $model
+                ->get();
         }
 
         return $model
@@ -45,11 +53,11 @@ class ServicesRepository extends BaseRepository
     {
         $model = $this->model;
 
-        if($request->has('hair_size')) {
+        if ($request->has('hair_size')) {
             $model = $model->where('hair_size', $request->hair_size);
         }
 
-        if($request->has('hair_type')) {
+        if ($request->has('hair_type')) {
             $model = $model->where('hair_type', $request->hair_type);
         }
 
