@@ -34,6 +34,10 @@ class BookingsRepository extends BaseRepository
             $model = $model->whereYear('booking_time', '=', $request->year);
         }
 
+        if ($request->has('customer_id')) {
+            $model = $model->with('services')->where('customer_id', '=', $request->customer_id);
+        }
+
         if ($request->has('month')) {
             // return Booking::where('id', '=', 1)->get();
             $model = $model->whereMonth('booking_time', '=', $request->month);

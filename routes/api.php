@@ -38,7 +38,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/test/email', [App\Http\Controllers\Api\BookingsController::class, 'testMail']);
     Route::apiResource('bookings', App\Http\Controllers\Api\BookingsController::class);
     Route::apiResource('promocodes', App\Http\Controllers\Api\PromocodesController::class);
-    Route::post('bookings/cancel', [App\Http\Controllers\Api\BookingsController::class, 'destroy']);
+    Route::post('bookings/cancel', [App\Http\Controllers\Api\BookingsController::class, 'cancel']);
     Route::post('logout', [App\Http\Controllers\Api\Auth\AuthController::class, 'logout']);
 });
 

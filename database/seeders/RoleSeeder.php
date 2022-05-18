@@ -73,10 +73,11 @@ class RoleSeeder extends Seeder
         $adminRole->givePermissionTo($permission);
         $customerRole->givePermissionTo($permission);
         $guestRole->givePermissionTo($permission);
-
+        
         // index booking permission
         $permission = Permission::create(['name' => 'bookings.index']);
         $adminRole->givePermissionTo($permission);
+        $customerRole->givePermissionTo($permission);
         $stylistRole->givePermissionTo($permission);
 
         // show booking permission
