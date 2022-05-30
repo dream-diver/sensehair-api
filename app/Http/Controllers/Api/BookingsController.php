@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Mail;
 use Dotunj\LaraTwilio\Facades\LaraTwilio;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class BookingsController extends Controller
 {
@@ -47,19 +48,20 @@ class BookingsController extends Controller
         try {
             $booking = $this->repository->store($request);
             $email = auth()->user()->email;
-            $message = "You have an appointment with Sense Hair on ".$booking->booking_time->toDateString(). " at " .$booking->booking_time->format('H:i'). " at Central Plaza 12. See you there!";
-            try {
-                Mail::to($email)->send(new BookingSuccessful($booking));
-                LaraTwilio::notify(auth()->user()->phone, $message);
-            } catch (\Throwable $th) {
-                
+            $message = "You have an appointment with Sense Hair on " . $booking->booking_time->toDateString() . " at " . $booking->booking_time->format('H:i') . " at Central Plaza 12. See you there!";
+            if ($request->sendEmailAndSms == true) {
+                try {
+                    Mail::to($email)->send(new BookingSuccessful($booking));
+                    LaraTwilio::notify(auth()->user()->phone, $message);
+                } catch (\Throwable $th) {
+                }
             }
         } catch (\Exception $e) {
             return $this->respondServerError(['message' => $e->getMessage()]);
         }
         return $this->respondCreated(['booking' => new BookingResource($booking)]);
     }
-    
+
     public function show(Booking $booking)
     {
         $this->authorize('view', $booking);
@@ -107,18 +109,18 @@ class BookingsController extends Controller
     {
         $booking = Booking::first();
         $email = auth()->user()->email;
-        $message = "You have an appointment with Sense Hair on ".$booking->booking_time->toDateString(). " at " .$booking->booking_time->format('H:i'). " at Central Plaza 12. See you there!";
+        $message = "You have an appointment with Sense Hair on " . $booking->booking_time->toDateString() . " at " . $booking->booking_time->format('H:i') . " at Central Plaza 12. See you there!";
         Mail::to($email)->send(new BookingSuccessful($booking));
         LaraTwilio::notify('+8801521323474', $message);
 
 
         // auth()->user()->notify(new BookingCreatedNotification($booking));
         // $data = array('name'=>env('MAIL_FROM_NAME'),'booking'=>$booking);
-    
-	    // Mail::send(['text'=>'mail.notify'], $data, function($message) use($email){
-	    //     $message->to($email)->subject('Booking Seuccessful');
-	    //     $message->from(env('MAIL_FROM_ADDRESS'));
-	    // });
+
+        // Mail::send(['text'=>'mail.notify'], $data, function($message) use($email){
+        //     $message->to($email)->subject('Booking Seuccessful');
+        //     $message->from(env('MAIL_FROM_ADDRESS'));
+        // });
         // try {
         //     // return "Notified".env('MEMCACHED_HOST');
         // } catch (\Throwable $th) {

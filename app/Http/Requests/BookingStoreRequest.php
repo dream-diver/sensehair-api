@@ -37,6 +37,7 @@ class BookingStoreRequest extends FormRequest
             'stripe_id' => ['string', 'nullable'],
             'promocode' => ['string', 'nullable'],
             'services' => ['required', 'array'],
+            // 'sendEmailAndSms' => ['required'],
         ];
     }
 }
