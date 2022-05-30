@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('123456'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            'avatar_path' => env('APP_URL') . '/carlos3.png'
+            'avatar_path' => env('APP_URL') . '/images/carlos3.png'
         ]);
         $user->assignRole('art_director');
 
@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('123456'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            'avatar_path' => env('APP_URL') . '/cheyenne.png'
+            'avatar_path' => env('APP_URL') . '/images/cheyenne.png'
         ]);
         $user->assignRole('stylist');
 
@@ -54,7 +54,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('123456'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            'avatar_path' => env('APP_URL') . '/xavier.png'
+            'avatar_path' => env('APP_URL') . '/images/xavier.png'
         ]);
         $user->assignRole('stylist');
 

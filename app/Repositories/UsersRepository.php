@@ -101,7 +101,7 @@ class UsersRepository extends BaseRepository
         if (isset($attributes['password'])) {
             $attributes['password'] = bcrypt($request->password);
         } else {
-            $attributes['password'] = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+            $attributes['password'] = bcrypt("123456");
         }
 
         if (isset($attributes['avatar'])) {
@@ -110,7 +110,7 @@ class UsersRepository extends BaseRepository
             $file = $request->file('avatar');
             $imageName = $file->getClientOriginalName();
             $file->move(public_path('images'), $imageName);
-            $attributes['avatar_path'] = url('/')."/images/".$imageName;
+            $attributes['avatar_path'] = env('APP_URL')."/images/".$imageName;
             unset($attributes['avatar']);
         }
 
