@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
@@ -17,34 +16,50 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-		DB::table('users')->insert([
+        DB::table('users')->insert([
             'name' => 'Admin',
-			'email' => 'admin@demo.com',
-			'password' => bcrypt('admin@demo.com'),
-			// 'division_id' => 0,
-			'created_at'=> Carbon::now(),
-			'updated_at'=> Carbon::now(),
-		]);
-		$user = User::first();
-		$user->assignRole('admin');
-        if(App::environment('local')){
-            User::factory()->count(25)->create()->each(function($user){
-                $user->assignRole('customer');
-            });
+            'email' => 'admin@demo.com',
+            'password' => bcrypt('admin@demo.com'),
+            // 'division_id' => 0,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        $user = User::first();
+        $user->assignRole('admin');
 
-            User::factory()->count(5)->create()->each(function($user){
-                $user->assignRole('stylist');
-                $user->update([
-                    'avatar_path' => env('APP_URL') . '/hisoka.jpg'
-                ]);
-            });
 
-            User::factory()->count(5)->create()->each(function($user){
-                $user->assignRole('art_director');
-                $user->update([
-                    'avatar_path' => env('APP_URL') . '/hisoka.jpg'
-                ]);
-            });
-        }
+        $user = User::create([
+            'name' => 'Carlos',
+            'email' => 'carlos_kapper@msn.com',
+            'password' => bcrypt('123456'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'avatar_path' => env('APP_URL') . '/carlos3.png'
+        ]);
+        $user = User::first();
+        $user->assignRole('art_director');
+
+        $user = User::create([
+            'name' => 'Cheyenne',
+            'email' => 'cheyenne@msn.com',
+            'password' => bcrypt('123456'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'avatar_path' => env('APP_URL') . '/cheyenne.png'
+        ]);
+        $user = User::first();
+        $user->assignRole('stylist');
+
+        $user = User::create([
+            'name' => 'Xavier',
+            'email' => 'xavier@msn.com',
+            'password' => bcrypt('123456'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'avatar_path' => env('APP_URL') . '/xavier.png'
+        ]);
+        $user = User::first();
+        $user->assignRole('stylist');
+
     }
 }
