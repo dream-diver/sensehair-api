@@ -79,6 +79,7 @@ class RoleSeeder extends Seeder
         $adminRole->givePermissionTo($permission);
         $customerRole->givePermissionTo($permission);
         $stylistRole->givePermissionTo($permission);
+        $artDirectortRole->givePermissionTo($permission);
 
         // show booking permission
         $permission = Permission::create(['name' => 'bookings.show']);
