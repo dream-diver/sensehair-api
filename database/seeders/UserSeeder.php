@@ -36,7 +36,6 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now(),
             'avatar_path' => env('APP_URL') . '/carlos3.png'
         ]);
-        $user = User::first();
         $user->assignRole('art_director');
 
         $user = User::create([
@@ -47,7 +46,6 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now(),
             'avatar_path' => env('APP_URL') . '/cheyenne.png'
         ]);
-        $user = User::first();
         $user->assignRole('stylist');
 
         $user = User::create([
@@ -58,7 +56,6 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now(),
             'avatar_path' => env('APP_URL') . '/xavier.png'
         ]);
-        $user = User::first();
         $user->assignRole('stylist');
 
     }
