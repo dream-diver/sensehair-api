@@ -108,10 +108,10 @@ class BookingsController extends Controller
     public function testMail(Request $request)
     {
         $booking = Booking::first();
-        $email = auth()->user()->email;
+        $email = $request->email;
         $message = "You have an appointment with Sense Hair on " . $booking->booking_time->toDateString() . " at " . $booking->booking_time->format('H:i') . " at Central Plaza 12. See you there!";
         Mail::to($email)->send(new BookingSuccessful($booking));
-        LaraTwilio::notify('+8801521323474', $message);
+        LaraTwilio::notify($request->phone, $message);
 
 
         // auth()->user()->notify(new BookingCreatedNotification($booking));
