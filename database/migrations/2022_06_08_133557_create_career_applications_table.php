@@ -33,7 +33,8 @@ class CreateCareerApplicationsTable extends Migration
             $table->json("exp1");
             $table->json("exp2");
             $table->json("exp3");
-            $table->string("motivation");
+            $table->string("motivation",2000)->nullable();
+            $table->string("resume")->nullable();
             $table->timestamps();
         });
     }
