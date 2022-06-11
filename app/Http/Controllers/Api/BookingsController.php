@@ -99,7 +99,7 @@ class BookingsController extends Controller
         $booking = Booking::find($request->booking_id);
         try {
             $this->repository->delete($booking);
-            return $this->respondNoContent();
+            return $this->respondOk(['message'=>"Booking cancelled successfully!"]);
         } catch (\Exception $e) {
             return $this->respondServerError(['message' => $e->getMessage()]);
         }
