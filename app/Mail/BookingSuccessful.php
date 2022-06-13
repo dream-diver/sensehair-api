@@ -17,20 +17,17 @@ class BookingSuccessful extends Mailable
      * @return void
      */
 
-    public $booking;
+    public $body = "";
+    public $title;
 
-    public function __construct($booking)
+    public function __construct($body,$title)
     {
-        $this->booking = $booking;
+        $this->body = (string) $body;
+        $this->title = $title;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
-        return $this->subject("Booking Seuccessful")->view('mail.notify');
+        return $this->subject($this->title)->view('mail.notify');
     }
 }

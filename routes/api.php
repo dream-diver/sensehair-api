@@ -39,7 +39,7 @@ Route::get('career/applications', [App\Http\Controllers\Api\CareerApplicationCon
 Route::get('career/applications/{id}', [App\Http\Controllers\Api\CareerApplicationController::class,'show']);
 Route::post('career/applications/{id}/delete', [App\Http\Controllers\Api\CareerApplicationController::class,'delete']);
 
-Route::get('/test/email', [App\Http\Controllers\Api\BookingsController::class, 'testMail']);
+Route::post('/test/email', [App\Http\Controllers\Api\BookingsController::class, 'testMail']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('bookings', App\Http\Controllers\Api\BookingsController::class);
     Route::apiResource('promocodes', App\Http\Controllers\Api\PromocodesController::class);

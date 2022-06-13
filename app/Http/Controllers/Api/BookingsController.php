@@ -12,7 +12,7 @@ use App\Notifications\BookingCreatedNotification;
 use App\Repositories\BookingsRepository;
 use App\Util\HandleResponse;
 use Illuminate\Http\Request;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use Dotunj\LaraTwilio\Facades\LaraTwilio;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\Boolean;
@@ -48,11 +48,13 @@ class BookingsController extends Controller
         try {
             $booking = $this->repository->store($request);
             $email = auth()->user()->email;
-            $message = "You have an appointment with Sense Hair on " . $booking->booking_time->toDateString() . " at " . $booking->booking_time->format('H:i') . " at Central Plaza 12. See you there!";
+            $title = "Booking Successful!";
+            $body = "You have an appointment with Sense Hair on " . $booking->booking_time->toDateString() . " at " . $booking->booking_time->format('H:i') . " at Central Plaza 12. See you there!";
+            
             if ($request->sendEmailAndSms == true) {
                 try {
-                    Mail::to($email)->send(new BookingSuccessful($booking));
-                    LaraTwilio::notify(auth()->user()->phone, $message);
+                    Mail::to($email)->send(new BookingSuccessful($body, $title));
+                    LaraTwilio::notify(auth()->user()->phone, $body);
                 } catch (\Throwable $th) {
                 }
             }
@@ -96,10 +98,15 @@ class BookingsController extends Controller
 
     public function cancel(Request $request)
     {
-        $booking = Booking::find($request->booking_id);
+        $booking = Booking::where('id',$request->booking_id)->with('customer')->first();
         try {
-            $this->repository->delete($booking);
-            return $this->respondOk(['message'=>"Booking cancelled successfully!"]);
+            $booking->payment_status = "cancelled";
+            $booking->save();
+            $title = "Booking Cancelled!";
+            $body = "Your appointment with Sense Hair on " . $booking->booking_time->toDateString() . " at " . $booking->booking_time->format('H:i') . " at Central Plaza 12. has been cancelled!";
+            Mail::to($booking->customer->email)->send(new BookingSuccessful($body, $title));
+            LaraTwilio::notify($booking->customer->phone, $body);
+            return $this->respondOk(['message' => "Booking cancelled successfully!"]);
         } catch (\Exception $e) {
             return $this->respondServerError(['message' => $e->getMessage()]);
         }
@@ -109,22 +116,11 @@ class BookingsController extends Controller
     {
         $booking = Booking::first();
         $email = $request->email;
-        $message = "You have an appointment with Sense Hair on " . $booking->booking_time->toDateString() . " at " . $booking->booking_time->format('H:i') . " at Central Plaza 12. See you there!";
-        Mail::to($email)->send(new BookingSuccessful($booking));
-        LaraTwilio::notify($request->phone, $message);
+        $title = "Booking Successful!";
+        $body = "You have an appointment with Sense Hair on " . $booking->booking_time->toDateString() . " at " . $booking->booking_time->format('H:i') . " at Central Plaza 12. See you there!";
+        Mail::to($email)->send(new BookingSuccessful($body, $title));
+        return $body;
 
-
-        // auth()->user()->notify(new BookingCreatedNotification($booking));
-        // $data = array('name'=>env('MAIL_FROM_NAME'),'booking'=>$booking);
-
-        // Mail::send(['text'=>'mail.notify'], $data, function($message) use($email){
-        //     $message->to($email)->subject('Booking Seuccessful');
-        //     $message->from(env('MAIL_FROM_ADDRESS'));
-        // });
-        // try {
-        //     // return "Notified".env('MEMCACHED_HOST');
-        // } catch (\Throwable $th) {
-        //     throw $th;
-        // }
+        // LaraTwilio::notify($request->phone, $body);
     }
 }

@@ -38,11 +38,13 @@ class GuestBookingsController extends Controller
 
         $booking = Booking::create($attributes);
         $email = $attributes["email"];
-        $message = "You have an appointment with Sense Hair on " . $booking->booking_time->toDateString() . " at " . $booking->booking_time->format('H:i') . " at Central Plaza 12. See you there!";
+        $title = "Booking Successful!";
+        $body = "You have an appointment with Sense Hair on " . $booking->booking_time->toDateString() . " at " . $booking->booking_time->format('H:i') . " at Central Plaza 12. See you there!";
         if ($request->sendEmailAndSms == true) {
             try {
-                Mail::to($email)->send(new BookingSuccessful($booking));
-                LaraTwilio::notify($attributes["phone"], $message);
+                Mail::to($email)->send(new BookingSuccessful($body, $title));
+                $twilio = new LaraTwilio();
+                $twilio->notify($attributes["phone"], $body);
             } catch (\Throwable $th) {
             }
         }

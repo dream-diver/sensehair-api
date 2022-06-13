@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Booking;
@@ -35,7 +36,7 @@ class BookingsRepository extends BaseRepository
         }
 
         if ($request->has('customer_id')) {
-            $model = $model->with('services')->where('customer_id', '=', $request->customer_id);
+            $model = $model->with('services')->where('customer_id', '=', $request->customer_id)->where('payment_status','!=','cancelled');
         }
 
         if ($request->has('month')) {
@@ -134,12 +135,12 @@ class BookingsRepository extends BaseRepository
 
         if (isset($attributes['promocode'])) {
             $promocode = Promocode::where('code', $attributes['promocode'])->first();
-            if($promocode) {
-                $attributes['charge'] = $attributes['charge'] * ((100-$promocode->discount) / 100);
+            if ($promocode) {
+                $attributes['charge'] = $attributes['charge'] * ((100 - $promocode->discount) / 100);
                 $attributes['promocode_id'] = $promocode->id;
             }
         }
-        if(array_key_exists('promocode', $attributes)) {
+        if (array_key_exists('promocode', $attributes)) {
             unset($attributes['promocode']);
         }
         return $attributes;

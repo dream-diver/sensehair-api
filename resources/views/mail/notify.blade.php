@@ -1,33 +1,3 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Successful</title>
-</head>
-<style>
-    .border {
-        border: 1px solid #dee2e6 !important;
-    }
-
-</style>
-
-<body>
-    <div style="display: flex; background-color: #dee2e6;">
-        <div>
-
-        </div>
-        <h1 style="text-align: center">Booking Successful!</h1>
-
-        You have an appointment with Sense Hair on {{ $booking->booking_time->toDateString() }} at
-        {{ $booking->booking_time->format('H:i') }} at Central Plaza 12. See you there!
-    </div>
-</body>
-
-</html> --}}
-
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
     xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -41,10 +11,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
 
-    <!-- CSS Reset : BEGIN -->
     <style>
-        /* What it does: Remove spaces around the email design added by some email clients. */
-        /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
         html,
         body {
             margin: 0 auto !important;
@@ -54,25 +21,21 @@
             background: #f1f1f1;
         }
 
-        /* What it does: Stops email clients resizing small text. */
         * {
             -ms-text-size-adjust: 100%;
             -webkit-text-size-adjust: 100%;
         }
 
-        /* What it does: Centers email on Android 4.4 */
         div[style*="margin: 16px 0"] {
             margin: 0 !important;
         }
 
-        /* What it does: Stops Outlook from adding extra spacing to tables. */
         table,
         td {
             mso-table-lspace: 0pt !important;
             mso-table-rspace: 0pt !important;
         }
 
-        /* What it does: Fixes webkit padding issue. */
         table {
             border-spacing: 0 !important;
             border-collapse: collapse !important;
@@ -80,19 +43,15 @@
             margin: 0 auto !important;
         }
 
-        /* What it does: Uses a better rendering method when resizing images in IE. */
         img {
             -ms-interpolation-mode: bicubic;
         }
 
-        /* What it does: Prevents Windows 10 Mail from underlining links despite inline CSS. Styles for underlined links should be inline. */
         a {
             text-decoration: none;
         }
 
-        /* What it does: A work-around for email clients meddling in triggered links. */
         *[x-apple-data-detectors],
-        /* iOS */
         .unstyle-auto-detected-links *,
         .aBn {
             border-bottom: 0 !important;
@@ -105,46 +64,37 @@
             line-height: inherit !important;
         }
 
-        /* What it does: Prevents Gmail from displaying a download button on large, non-linked images. */
         .a6S {
             display: none !important;
             opacity: 0.01 !important;
         }
 
-        /* What it does: Prevents Gmail from changing the text color in conversation threads. */
         .im {
             color: inherit !important;
         }
 
-        /* If the above doesn't work, add a .g-img class to any image in question. */
         img.g-img+div {
             display: none !important;
         }
 
-        /* What it does: Removes right gutter in Gmail iOS app: https://github.com/TedGoas/Cerberus/issues/89  */
-        /* Create one of these media queries for each additional viewport size you'd like to fix */
 
-        /* iPhone 4, 4S, 5, 5S, 5C, and 5SE */
         @media only screen and (min-device-width: 320px) and (max-device-width: 374px) {
             u~div .email-container {
                 min-width: 320px !important;
             }
         }
 
-        /* iPhone 6, 6S, 7, 8, and X */
         @media only screen and (min-device-width: 375px) and (max-device-width: 413px) {
             u~div .email-container {
                 min-width: 375px !important;
             }
         }
 
-        /* iPhone 6+, 7+, and 8+ */
         @media only screen and (min-device-width: 414px) {
             u~div .email-container {
                 min-width: 414px !important;
             }
         }
-
     </style>
 
     <!-- CSS Reset : END -->
@@ -175,7 +125,6 @@
             padding: 2.5em;
         }
 
-        /*BUTTON*/
         .btn {
             padding: 10px 15px;
             display: inline-block;
@@ -370,7 +319,6 @@
 
 
         @media screen and (max-width: 500px) {}
-
     </style>
 
 
@@ -396,36 +344,29 @@
                             </tr>
                         </table>
                     </td>
-                </tr><!-- end tr -->
+                </tr>
                 <tr>
-                </tr><!-- end tr -->
+                </tr>
                 <tr>
                     <td valign="middle" class="hero bg_white" style="padding: 2em 0 4em 0;">
                         <table>
                             <tr>
                                 <td>
                                     <div class="text" style="padding: 0 2.5em; text-align: center;">
-                                        <h2>Booking Successful</h2>
-                                        <h3> You have an appointment with Sense Hair on
-                                            <strong>
-                                                {{ $booking->booking_time->format('M d, Y') }} at
-                                                {{ $booking->booking_time->format('H:i') }}
-                                            </strong>
-                                            at Central Plaza 12. See you there!
+                                        <h2> {{ $title }} </h2>
+                                        <h3>
+                                            {{ $body }}
                                         </h3>
-                                        {{-- <p><a href="#" class="btn btn-primary">Yes! Subscribe Me</a></p> --}}
                                     </div>
                                 </td>
                             </tr>
                         </table>
                     </td>
-                </tr><!-- end tr -->
-                <!-- 1 Column Text + Button : END -->
+                </tr>
             </table>
             <tr>
                 <td class="bg_light" style="text-align: center;">
-                    <p>&copy; Sense Hair 2022 <a href="#"
-                            style="color: rgba(0,0,0,.8);">visit us here</a></p>
+                    <p>&copy; Sense Hair 2022 <a href="#" style="color: rgba(0,0,0,.8);">visit us here</a></p>
                 </td>
             </tr>
 
