@@ -23,7 +23,7 @@ class CreateServicesTable extends Migration
             $table->float('art_director_price');
 
             $table->string('hair_size');
-            $table->string('hair_size_nl');
+            $table->string('hair_size_nl')->nullable();
             $table->string('hair_type')->nullable();
             $table->string('hair_type_nl')->nullable();
             

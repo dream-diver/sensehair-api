@@ -52,7 +52,23 @@ class ServicesController extends Controller
         $this->authorize('create', App\Models\Service::class);
 
         try {
-            $service = $this->repository->store($request);
+            $service = new Service();
+            $service->name=$request->name;
+            $service->name_en=$request->name_en;
+            $service->duration=$request->duration; // in minutes
+
+            $service->stylist_price=$request->stylist_price;
+            $service->art_director_price=$request->art_director_price;
+
+            $service->hair_size=$request->hair_size;
+            $service->hair_size_nl=$request->hair_size_nl;
+            $service->hair_type=$request->hair_type;
+            $service->hair_type_nl=$request->hair_type_nl;
+            
+            $service->category=$request->category;
+            $service->category_en=$request->category_en;
+            $service->save();
+            // $service = $this->repository->store($request);
             return $this->respondCreated(['service' => new ServiceResource($service)]);
         } catch (\Exception $e) {
             return $this->respondServerError(['message' => $e->getMessage()]);
