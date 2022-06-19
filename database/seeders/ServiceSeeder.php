@@ -1030,5 +1030,18 @@ class ServiceSeeder extends Seeder
             $service->category_en = $catEn;
             $service->save();
         }
+
+        $service = new Service();
+        $service->name = "Service to test Payment";
+        $service->name_en = "Service to test Payment";
+        $service->duration = 10;
+        $service->stylist_price = 1;
+        $service->art_director_price = 1;
+        $service->hair_size = "Men";
+        $service->hair_size_nl = "Heren";
+
+        $service->category = "Knippen en stylen";
+        $service->category_en = "Cut and style";
+        $service->save();
     }
 }
