@@ -47,7 +47,7 @@ class ServicesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ServiceStoreRequest $request)
+    public function store(Request $request)
     {
         $this->authorize('create', App\Models\Service::class);
 
