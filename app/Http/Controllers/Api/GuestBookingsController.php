@@ -43,8 +43,7 @@ class GuestBookingsController extends Controller
         if ($request->sendEmailAndSms == true) {
             try {
                 Mail::to($email)->send(new BookingSuccessful($body, $title));
-                $twilio = new LaraTwilio();
-                $twilio->notify($attributes["phone"], $body);
+                LaraTwilio::notify($attributes["phone"], $body);
             } catch (\Throwable $th) {
             }
         }
