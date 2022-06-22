@@ -18,11 +18,6 @@ class BookingsRepository extends BaseRepository
         $this->model = $model;
     }
 
-    /**
-     * get all the items collection from database table using model.
-     *
-     * @return Collection of items.
-     */
     public function get(Request $request)
     {
         $model = $this->model;
@@ -36,7 +31,7 @@ class BookingsRepository extends BaseRepository
         }
 
         if ($request->has('customer_id')) {
-            $model = $model->with('services')->where('customer_id', '=', $request->customer_id)->where('payment_status','!=','cancelled');
+            $model = $model->with('services')->where('customer_id', '=', $request->customer_id)->where('payment_status', '!=', 'cancelled');
         }
 
         if ($request->has('month')) {
@@ -44,10 +39,7 @@ class BookingsRepository extends BaseRepository
             $model = $model->whereMonth('booking_time', '=', $request->month);
         }
 
-        if ($request->user()->hasRole('admin')) {
-            $model = $model->with('services');
-        }
-
+        $model = $model->with('services');
 
         return $model
             ->orderBy($request->input('orderBy', 'created_at'), $request->input('sort', 'desc'))

@@ -23,11 +23,6 @@ class ServicesController extends Controller
         $this->middleware('auth:sanctum')->except('index', 'addManyService');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $this->authorize('viewAny', App\Models\Service::class);
@@ -41,12 +36,6 @@ class ServicesController extends Controller
         return ServiceResource::collection($services);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->authorize('create', App\Models\Service::class);
@@ -75,26 +64,12 @@ class ServicesController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
     public function show(Service $service)
     {
         $this->authorize('view', $service);
-
         return $this->respondOk(['service' => new ServiceResource($service)]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
     public function update(ServiceUpdateRequest $request, Service $service)
     {
         $this->authorize('update', $service);
@@ -107,12 +82,6 @@ class ServicesController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Service $service)
     {
         $this->authorize('delete', $service);
