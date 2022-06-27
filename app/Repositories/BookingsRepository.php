@@ -49,6 +49,9 @@ class BookingsRepository extends BaseRepository
     public function getSearchData(Request $request)
     {
         $model = $this->model;
+        if ($request->has('server_id')) {
+            $model = $model->where('server_id', $request->server_id);
+        }
         if ($request->has('search')) {
             $search = request('search');
             $model = $model->with('customer')->with('server')

@@ -84,10 +84,14 @@ class RoleSeeder extends Seeder
         // show booking permission
         $permission = Permission::create(['name' => 'bookings.show']);
         $adminRole->givePermissionTo($permission);
+        $stylistRole->givePermissionTo($permission);
+        $artDirectortRole->givePermissionTo($permission);
 
         // update booking permission
         $permission = Permission::create(['name' => 'bookings.update']);
         $adminRole->givePermissionTo($permission);
+        $stylistRole->givePermissionTo($permission);
+        $artDirectortRole->givePermissionTo($permission);
 
         // delete booking permission
         $permission = Permission::create(['name' => 'bookings.delete']);
