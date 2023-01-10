@@ -16,7 +16,8 @@ class AuthController extends Controller
 {
     use HandleResponse;
 
-    public function login(UserLoginRequest $request){
+    public function login(UserLoginRequest $request)
+    {
         $user = User::where('email', $request->email)
             ->first();
 
@@ -34,7 +35,8 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register(UserRegisterRequest $request){
+    public function register(UserRegisterRequest $request)
+    {
         $user = User::where('email', $request->email)
             ->first();
 

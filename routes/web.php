@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 // })->name('password.reset');
 
 Route::view('forgot_password', 'auth.reset_password')->name('password.reset');
-Route::post('password/reset',[App\Http\Controllers\Api\ForgotPasswordController::class, 'reset'])->name('confirm.reset');
+Route::post('password/reset', [App\Http\Controllers\Api\ForgotPasswordController::class, 'reset'])->name('confirm.reset');
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,5 +30,5 @@ Route::get('/reset/success', function () {
 
 Route::get('/mail', function () {
     $booking = Booking::first();
-    return view('mail.notify',compact('booking'));
+    return view('mail.notify', compact('booking'));
 });

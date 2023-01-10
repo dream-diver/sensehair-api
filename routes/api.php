@@ -34,10 +34,10 @@ Route::get('getPromocodeFromCode/{code}', App\Http\Controllers\Api\PromocodeDeta
 Route::apiResource('services', App\Http\Controllers\Api\ServicesController::class);
 Route::apiResource('users', App\Http\Controllers\Api\UsersController::class);
 
-Route::post('career/apply', [App\Http\Controllers\Api\CareerApplicationController::class,'apply']);
-Route::get('career/applications', [App\Http\Controllers\Api\CareerApplicationController::class,'index']);
-Route::get('career/applications/{id}', [App\Http\Controllers\Api\CareerApplicationController::class,'show']);
-Route::post('career/applications/{id}/delete', [App\Http\Controllers\Api\CareerApplicationController::class,'delete']);
+Route::post('career/apply', [App\Http\Controllers\Api\CareerApplicationController::class, 'apply']);
+Route::get('career/applications', [App\Http\Controllers\Api\CareerApplicationController::class, 'index']);
+Route::get('career/applications/{id}', [App\Http\Controllers\Api\CareerApplicationController::class, 'show']);
+Route::post('career/applications/{id}/delete', [App\Http\Controllers\Api\CareerApplicationController::class, 'delete']);
 
 Route::post('/test/email', [App\Http\Controllers\Api\BookingsController::class, 'testMail']);
 Route::middleware('auth:sanctum')->group(function () {
