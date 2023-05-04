@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\Route;
 Route::view('forgot_password', 'auth.reset_password')->name('password.reset');
 Route::post('password/reset', [App\Http\Controllers\Api\ForgotPasswordController::class, 'reset'])->name('confirm.reset');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
 
 Route::get('/reset/success', function () {
     return view('auth.reset_success');
@@ -32,3 +32,9 @@ Route::get('/mail', function () {
     $booking = Booking::first();
     return view('mail.notify', compact('booking'));
 });
+
+Route::get('/', function() {
+    return redirect('admin');
+});
+
+Route::get('planner', 'App\Http\Controllers\PlannerCrudController@index')->name('planner');
